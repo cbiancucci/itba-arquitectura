@@ -1,0 +1,15 @@
+cd ./bin
+rm -rf *
+nasm -f aout ../src/libasm.asm -o libasm.o
+nasm -f aout ../src/kstart.asm -o kstart.o
+nasm -f aout ../src/loader.asm -o kstart.o
+gcc -c -g ../src/keyboard.c  -o keyboard.o -fno-builtin -Wall
+gcc -c -g ../src/stdio.c  -o stdio.o -fno-builtin -Wall
+gcc -c -g ../src/pci.c  -o pci.o -fno-builtin -Wall
+gcc -c -g ../src/string.c  -o string.o -fno-builtin -Wall
+gcc -c -g ../src/shell.c  -o shell.o -fno-builtin -Wall
+gcc -c -g ../src/video.c  -o video.o -fno-builtin -Wall
+gcc -c -g ../src/syscalls.c  -o syscalls.o -fno-builtin -Wall
+gcc -c -g ../src/kernel.c -o kernel.o -fno-builtin -Wall
+gcc -c -g ../src/libc.c  -o libc.o -fno-builtin -Wall
+ld -T ../src/link.ld -o Cosox.bin kernel.o kstart.o libc.o libasm.o keyboard.o shell.o syscalls.o stdio.o string.o video.o pci.o

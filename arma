@@ -1,0 +1,3 @@
+./compila
+cd ./bin
+mcopy Cosox.bin b:boot/ -o
