@@ -31,3 +31,27 @@ int putc(int c, int fd){
 	}
 	return ret;
 }
+
+int isDigit(char c){
+	if(c >= '0' && c <= '9'){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+int isSpace(char c){
+	if(c == '\n' || c == '\t' || c == ' '){
+		return TRUE;
+	}
+	return FALSE;
+}
+
+int stringToInt(char string, int length){
+	int i, num = 0;
+
+	for(i = 0; i < length; i++){
+		num *= 10;
+		num += (string[i] - '0');
+	}
+	return num;
+}
