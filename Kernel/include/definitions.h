@@ -43,10 +43,48 @@
 #define PROMPT "sarasa$ "
 
 
+typedef int size_t;
+typedef short int ssize_t;
+typedef enum enum_INT_80 {WRITE = 0, READ} INT_80;
+typedef enum enum_SPACE {KERNEL = 0, USER} SPACE;
+
+/* BUFFER */
+typedef struct {
+	byte	buff[BUFFER_SIZE];
+	int 	write_offset,
+			read_offset;
+} BUFFER;
 
 
+/* SHELL */
+typedef struct {
+	char	screen[SCREEN_SIZE],
+			line_buffer[MAX_LINE];
+	int 	cursor,
+			lastEnter;
+} SHELL;
 
+/* Segment Descriptor */
+typedef struct {
+	word	limit,
+			base_l;
+	byte	base_m,
+			access,
+			attributes,
+			base_h;
+} SEGMENT_DESCRIPTOR;
 
+/* Interrupt Descriptor */
+typedef struct {
+	word	offset_l,
+			offset_h,
+			selector;
+	byte	zero,
+			access;
+} INTERRUPT_DESCRIPTOR;
 
-
-
+/* Interrupt Descriptor Table */
+typedef struct {
+	word	limit;
+	dword	base;
+} IDT;
