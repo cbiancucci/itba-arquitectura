@@ -39,7 +39,8 @@
 /* Buffer */
 #define BUFFER_SIZE		1024
 
-
+/* Shell prompt */
+#define PROMPT "sarasa$ "
 
 
 
