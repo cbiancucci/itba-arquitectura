@@ -10,24 +10,24 @@
 const char hexDigits [] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
 /* getc implementation */
-int getc(int fd){
+int getc(int fileDescriptor){
 	byte c;
-	return (__read(fd, &c, 1) == 1) ? (byte) c : EOF;
+	return (__read(fileDescriptor, &c, 1) == 1) ? (byte) c : EOF;
 }
 
 /* putc implementation */
-int putc(int c, int fd){
+int putc(int c, int fileDescriptor){
 	int ret;
 	byte aux = BLUE_TEXT;
 	byte character = (byte) c;
 
 	if(c == TAB){
-		putc(' ', fd);
-		putc(' ', fd);
-		putc(' ', fd);
+		putc(' ', fileDescriptor);
+		putc(' ', fileDescriptor);
+		putc(' ', fileDescriptor);
 	} else {
-		ret = (__write(fd, &character, 1) == 1) ? c : EOF;
-		__write(fd, &aux, 1);
+		ret = (__write(fileDescriptor, &character, 1) == 1) ? c : EOF;
+		__write(fileDescriptor, &aux, 1);
 	}
 	return ret;
 }

@@ -5,8 +5,8 @@
 
 #define EMPTY_BUFFER while(getChar() !='\n')
 
-int getc(int fd);
-int putc(int c, int fd);
+int getc(int fileDescriptor);
+int putc(int c, int fileDescriptor);
 void printf(char * format, ...);
 int scanf(char * format, ...);
 int isDigit(char);
