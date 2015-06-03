@@ -96,7 +96,6 @@ int main()
 	ncPrint("[Finished]");
 
 	while(1){
-		ncPrint(".");
 	}
 
 	return 0;
