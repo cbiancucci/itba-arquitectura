@@ -30,7 +30,7 @@
 #define WHITE_TEXT		0x07 // Letras blancas, fondo negro.
 
 /* Screen */
-#define SCREEN_SIZE		4000 // 80 * 25 * 2.
+#define SCREEN_SIZE		4000 // 80 * 25 * 2 (letra y fondo).
 #define SCREEN_START	160
 #define MAX_LINE		250
 #define LINES			25
