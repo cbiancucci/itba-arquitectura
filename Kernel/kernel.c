@@ -3,6 +3,7 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
+#include <video.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -98,6 +99,8 @@ int main()
 	ncPrint("  Sample data module contents: ");
 	ncPrint((char*)sampleDataModuleAddress);
 	ncNewline();
+
+	clear_screen();
 
 	ncPrint("[Finished]");
 	return 0;
