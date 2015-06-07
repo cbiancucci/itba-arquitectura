@@ -3,7 +3,7 @@
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
-#include <video.h>
+#include <syscalls.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -100,7 +100,7 @@ int main()
 	ncPrint((char*)sampleDataModuleAddress);
 	ncNewline();
 
-	clear_screen();
+	sys_clear_screen();
 
 	ncPrint("[Finished]");
 	return 0;

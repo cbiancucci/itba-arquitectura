@@ -1,6 +1,17 @@
 
-/** read **/
-size_t __read(int, byte *, size_t);
+#ifndef SYSCALLS_HEADER
+#define SYSCALLS_HEADER
 
-/** write **/
-size_t __write(int, const byte *, size_t);
+#include <definitions.h>
+
+#define SYSCALL_EXIT						0
+#define SYSCALL_READ						1
+#define SYSCALL_WRITE						2
+#define SYSCALL_CLEAR_SCREEN				3
+
+
+int sys_read(FILE_DESCRIPTOR fileDescriptor, char * string, int length);
+void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length);
+void sys_clear_screen();
+
+#endif
