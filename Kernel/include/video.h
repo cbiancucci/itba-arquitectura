@@ -25,6 +25,7 @@ void video_clear_screen();
 void video_printc(const char c);
 void video_print_new_line();
 void video_print_string(const char * string);
+void video_set_color(int color);
 
 
 #endif

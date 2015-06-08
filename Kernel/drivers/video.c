@@ -5,7 +5,7 @@ int video_current_column = 0;
 static color_t video_current_color = 0;
 
 static void video_print_char(uint16_t c);
-static void video_print_char_at(uint16_t c, int col, int row);
+static void video_print_char_at(uint16_t c, int row, int col);
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
 //static void video_reset_color();
@@ -22,7 +22,7 @@ void video_update_screen_color() {
 }
 
 void video_set_color(int color){
-	video_current_color = CREATE_COLOR(15, 0);
+	video_current_color = CREATE_COLOR(color, 0);
 }
 
 void video_clear_screen(){
@@ -61,7 +61,7 @@ static void video_print_char(uint16_t c) {
 	}
 }
 
-static void video_print_char_at(uint16_t c, int col, int row){
+static void video_print_char_at(uint16_t c, int row, int col){
 	SCREEN_START[row * SCREEN_WIDTH + col] = c;
 }
 
@@ -81,7 +81,7 @@ static void video_scroll(){
 	}
 	video_current_row--;
 	video_current_column = 0;
-	//video_update_screen_color();
+	video_update_screen_color();
 }
 
 static uint16_t video_get_full_char_from(int row, int col) {

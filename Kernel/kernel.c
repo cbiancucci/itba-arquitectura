@@ -101,6 +101,6 @@ int main()
 	ncNewline();*/
 
 	sys_clear_screen();
-	sys_write(0, "c", 1);
+	sys_write(0, "asdasdasdasdasdasdasdasdasdadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasa", 3);
 	return 0;
 }
