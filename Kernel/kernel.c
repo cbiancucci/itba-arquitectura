@@ -1,5 +1,9 @@
 #include <stdint.h>
+
+#if ! MACOS
 #include <string.h>
+#endif
+
 #include <lib.h>
 #include <moduleLoader.h>
 #include <naiveConsole.h>
@@ -18,6 +22,7 @@ static void * const sampleDataModuleAddress = (void*)0x500000;
 
 typedef int (*EntryPoint)();
 
+
 void clearBSS(void * bssAddress, uint64_t bssSize)
 {
 	memset(bssAddress, 0, bssSize);
@@ -34,8 +39,13 @@ void * getStackBase()
 
 void * initializeKernelBinary()
 {
+	char buffer[10];
+
 	ncPrint("[x64BareBones]");
 	ncNewline();
+
+	ncPrint("CPU Vendor:");
+	//cncPrint(cpuVendor(buffer));
 	ncNewline();
 
 	ncPrint("[Loading modules]");
@@ -94,9 +104,5 @@ int main()
 	ncNewline();
 
 	ncPrint("[Finished]");
-
-	while(1){
-	}
-
 	return 0;
 }
