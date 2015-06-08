@@ -5,6 +5,8 @@
 #ifndef DEFINITIONS_HEADER
 #define DEFINITIONS_HEADER
 
+#include <stdint.h>
+
 #define byte	unsigned char
 #define word	short int
 #define dword	int
@@ -13,14 +15,16 @@
 #define FALSE	0
 #define NULL	0
 
+#define EOF 	-1
+
 /* File descriptors */
 typedef enum {
-	STDIN,
 	STDOUT,
 	STDERR
 } FILE_DESCRIPTOR;
 
 /** VIDEO ATTRIBUTES **/
+typedef uint8_t color_t;
 
 /* Text color */
 #define BLUE_TEXT		0x01 // Letras azules, fondo negro.
