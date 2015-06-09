@@ -19,7 +19,7 @@ $(KERNEL): $(LOADEROBJECT) $(IODRIVEROBJECT) $(OBJECTS) $(STATICLIBS)
 	$(LD) $(LDFLAGS) -T kernel.ld -o $(KERNEL) $(LOADEROBJECT) $(IODRIVEROBJECT) $(OBJECTS) $(STATICLIBS)
 
 %.o: %.c
-	$(GCC) $(GCCFLAGS) -DMACOS=$(MACOS) -I./include -I../Headers -c $< -o $@
+	$(GCC) $(GCCFLAGS) -DMACOS=$(MACOS) -I./include -I../API -c $< -o $@
 
 $(LOADEROBJECT):
 	$(ASM) -felf64 $(LOADERSRC) -o $(LOADEROBJECT)
