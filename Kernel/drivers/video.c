@@ -157,7 +157,10 @@ static void video_scroll(){
 	video_update_screen_color();
 }
 
-// REFERENCE: http://wiki.osdev.org/Text_Mode_Cursor
+/*
+	Moving the Cursor without the BIOS, using video hardware control.
+	Reference: http://wiki.osdev.org/Text_Mode_Cursor
+*/
 void video_update_cursor() {
 	unsigned short position = (video_current_row * 80) + video_current_column;
 	// cursor LOW port to vga INDEX register

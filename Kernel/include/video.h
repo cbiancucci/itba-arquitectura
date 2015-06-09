@@ -14,12 +14,16 @@
 #define CREATE_COLOR(font, background) (color_t)((background << 4) | font)
 
 typedef struct {
+	uint16_t screen[SCREEN_HEIGHT*SCREEN_WIDTH];
 	int column;
 	int row;
-	uint16_t screen[SCREEN_HEIGHT*SCREEN_WIDTH];
 	color_t color;
 } screen_t;
 
+/*
+	VGA Color Definitions:
+	Reference: https://github.com/blt/bltos/blob/master/kernel.cpp
+*/
 typedef enum{
 	COLOR_BLACK = 0,
 	COLOR_BLUE = 1,
