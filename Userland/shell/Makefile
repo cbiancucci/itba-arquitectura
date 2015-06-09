@@ -4,13 +4,13 @@ include ../Makefile.inc
 MODULE=shellCodeModule.bin
 SOURCES=shell.c $(wildcard commands/*.c)
 
-HEADERS=-I../../Headers -I../libc/include -I./
+API=-I../../API -I../libc/include -I./
 LIBRARIES=-L../syscalls/lib -L../libc/lib
 
 all: $(MODULE)
 
 $(MODULE): $(SOURCES)
-	$(GCC) $(GCCFLAGS) -T shell.ld $(SOURCES) $(HEADERS) $(LIBRARIES) -lc -lsyscalls  -o ../$(MODULE)
+	$(GCC) $(GCCFLAGS) -T shell.ld $(SOURCES) $(API) $(LIBRARIES) -lc -lsyscalls  -o ../$(MODULE)
 
 clean:
 	rm -rf *.o
