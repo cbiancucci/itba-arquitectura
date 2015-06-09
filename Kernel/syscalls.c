@@ -11,14 +11,17 @@ int sys_read(FILE_DESCRIPTOR fileDescriptor, char * string, int length){
 void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length){
 	switch(fileDescriptor) {
 		case STDOUT:
-			video_set_color(15);
-			video_print_string(string);
+			video_set_font_background_color(COLOR_WHITE, COLOR_BLACK);
 			break;
 		case STDERR:
-			video_set_color(1);
-			video_print_string(string);
+			video_set_font_background_color(COLOR_RED, COLOR_BLACK);
 			break;
 	}
+	video_print_string(string);
+}
+
+void sys_init_scree(){
+	video_init();
 }
 
 void sys_clear_screen(){

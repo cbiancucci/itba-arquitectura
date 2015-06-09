@@ -8,11 +8,18 @@ static void video_print_char(uint16_t c);
 static void video_print_char_at(uint16_t c, int row, int col);
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
-//static void video_reset_color();
+static void video_reset_color();
 
-void video_reset_cursor(){
-	video_current_row = 0;
-	video_current_column = 0;
+void video_init(){
+	video_reset_cursor();
+	video_reset_color();
+	video_clear_screen();
+}
+
+// COLOR
+
+void video_reset_color(){
+	video_current_color = CREATE_COLOR(COLOR_WHITE, COLOR_BLACK);
 }
 
 void video_update_screen_color() {
@@ -21,8 +28,12 @@ void video_update_screen_color() {
 	}
 }
 
-void video_set_color(int color){
-	video_current_color = CREATE_COLOR(color, 0);
+void video_set_color(color_t color){
+	video_current_color = color;
+}
+
+void video_set_font_background_color(video_color font, video_color background){
+	video_current_color = CREATE_COLOR(font, background);
 }
 
 void video_clear_screen(){
@@ -32,6 +43,8 @@ void video_clear_screen(){
 	video_reset_cursor();
 	video_update_screen_color();
 }
+
+// PRINT
 
 void video_printc(const char c){
 	uint16_t char_16 = c;
@@ -70,20 +83,6 @@ void video_print_new_line(){
 	video_current_row++;
 }
 
-static void video_scroll(){
-	
-	for (int row = 1; row <= SCREEN_HEIGHT; row++) {
-		for (int column = 0; column < SCREEN_WIDTH; column++) {
-			uint16_t c = video_get_full_char_from(row, column);
-			video_print_char_at(c, row - 1, column);
-		}
-
-	}
-	video_current_row--;
-	video_current_column = 0;
-	video_update_screen_color();
-}
-
 static uint16_t video_get_full_char_from(int row, int col) {
 	return SCREEN_START[row * SCREEN_WIDTH + col];
 }
@@ -107,5 +106,35 @@ void video_print_string(const char * string) {
 	}
 
 	//video_update_cursor();
+}
 
+void video_println(const char * string){
+
+	if (video_current_column != 0) {
+		video_print_new_line();
+	}
+
+	video_print_string(string);
+	video_print_new_line();
+}
+
+// POSITION
+
+void video_reset_cursor(){
+	video_current_row = 0;
+	video_current_column = 0;
+}
+
+static void video_scroll(){
+	
+	for (int row = 1; row <= SCREEN_HEIGHT; row++) {
+		for (int column = 0; column < SCREEN_WIDTH; column++) {
+			uint16_t c = video_get_full_char_from(row, column);
+			video_print_char_at(c, row - 1, column);
+		}
+
+	}
+	video_current_row--;
+	video_current_column = 0;
+	video_update_screen_color();
 }

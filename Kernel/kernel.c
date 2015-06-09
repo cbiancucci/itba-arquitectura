@@ -4,6 +4,7 @@
 #include <moduleLoader.h>
 #include <naiveConsole.h>
 #include <syscalls.h>
+#include <video.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -83,6 +84,64 @@ void * initializeKernelBinary()
 
 int main()
 {	
+	video_init();
+	video_println("================================================================================");
+	video_println("                                - SARASA SARASA -                               ");
+	video_println("================================================================================");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
+	video_println("");
 /*	ncPrint("[Kernel Main]");
 	ncNewline();
 	ncPrint("  Sample code module at 0x");
@@ -100,7 +159,12 @@ int main()
 	ncPrint((char*)sampleDataModuleAddress);
 	ncNewline();*/
 
-	sys_clear_screen();
+	video_println("CHRIS");
 	sys_write(0, "asdasdasdasdasdasdasdasdasdadasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasa", 3);
+	sys_write(0, "\n", 0);
+	sys_write(0, "\n", 0);
+	sys_write(0, "\n", 0);
+	sys_write(1, "\t", 0);
+	sys_write(1, "chris", 0);
 	return 0;
 }

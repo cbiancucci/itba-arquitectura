@@ -12,6 +12,7 @@
 
 int sys_read(FILE_DESCRIPTOR fileDescriptor, char * string, int length);
 void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length);
+void sys_init_screen();
 void sys_clear_screen();
 
 #endif
