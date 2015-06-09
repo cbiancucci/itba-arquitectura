@@ -30,7 +30,6 @@ int main() {
 	static char buffer[CMD_BUFFER_SIZE] = {0};
 
 	while (1) {
-
 		printf("\nsarasa$ ");
 
 		if (scanf(buffer, CMD_BUFFER_SIZE) == 0) {
@@ -128,15 +127,18 @@ void print_command(int argc, char** argv) {
 void help_command(int argc, char** argv) {
 	// Si vino solo help, listo todos los comandos 
 	if (argc == 1) {
-		printf("Los comandos disponibles en Sarasa son:\n");
-		printf("\tprint \t\t: Imprime un mensaje en pantalla.\n");
-		printf("\thelp \t\t: Describe cada uno de los comandos disponibles en Sarasa.\n");
-		printf("\ttime \t\t: Permite consultar o indicar la hora del sistema.\n");
-		printf("\tclear\t\t: Limpia la pantalla.\n");
-		printf("\tscreensaver: Activa o configura el salvapantallas.\n");
-		printf("\texit \t\t: Finaliza el sistema.\n");
+		printf("Sarasa v1.0.0 (x64). GNU bash, version 0.0.1\n");
+		printf("Desarrollado para ARQUITECTURA DE LAS COMPUTADORAS.\n");
+		printf("@Zeitzen @matiasgualino @cbiancucci\n");
+		printf("\nComandos disponibles:\n");
+		printf("\tprint\t\t\tImprime un mensaje en pantalla.\n");
+		printf("\thelp\t\t\t Describe cada uno de los comandos disponibles.\n");
+		printf("\ttime\t\t\t Permite consultar o indicar la hora del sistema.\n");
+		printf("\tclear\t\t\tLimpia la pantalla.\n");
+		printf("\tscreensaver\t  Activa o configura el salvapantallas.\n");
+		printf("\texit\t\t\t Finaliza el sistema.\n");
 
-		printf("\nSi queres tener mas informacion de cada comando, proba con 'help COMANDO'\n");
+		printf("\nPara mas informacion de cada comando utilizar 'help [COMANDO]'\n");
 	} else if (argc == 2) {
 		// Si vino help y algo mas, tengo que ver si ese algo más es un comando de sarasa.
 		int cmd = 0;
