@@ -96,19 +96,21 @@ keyboardCode keyboardCodes[256] = {
     {0x44, NOTHING, NOTHING}, // F10
     {0x45, NOTHING, NOTHING}, // NUMPAD
     {0x46, NOTHING, NOTHING}, // SCROLL
-    {0x47, '7', NOTHING}, // KEYPAD 7
-    {0x48, '8', NOTHING}, // KEYPAD 8
-    {0x49, '9', NOTHING}, // KEYPAD 9
-    {0x4a, '-', NOTHING}, // KEYPAD -
-    {0x4b, '4', NOTHING}, // KEYPAD 4
-    {0x4c, '5', NOTHING}, // KEYPAD 5
-    {0x4d, '6', NOTHING}, // KEYPAD 6
-    {0x4e, '+', NOTHING}, // KEYPAD +
-    {0x4f, '1', NOTHING}, // KEYPAD 1
-    {0x50, '2', NOTHING}, // KEYPAD 2
-    {0x51, '3', NOTHING}, // KEYPAD 3
-    {0x52, '0', NOTHING}, // KEYPAD 0
-    {0x53, '.', NOTHING}, // KEYPAD .
+    {0x47, NOTHING, NOTHING}, // UP ARROW
+    {0x48, NOTHING, NOTHING}, // 
+    {0x49, NOTHING, NOTHING}, // 
+    {0x4a, NOTHING, NOTHING}, // 
+    {0x4b, NOTHING, NOTHING}, // LEFT ARROW
+    {0x4c, NOTHING, NOTHING}, // 
+    {0x4d, NOTHING, NOTHING}, // RIGHT ARROW
+    {0x4e, NOTHING, NOTHING}, // 
+    {0x4f, NOTHING, NOTHING}, // 
+    {0x50, NOTHING, NOTHING}, // DOWN ARROW
+    {0x51, NOTHING, NOTHING}, // 
+    {0x52, NOTHING, NOTHING}, // 
+    {0x53, NOTHING, NOTHING}, // DELETE
+    {0x55, '*', NOTHING},  
+    {0x56, '*', NOTHING}, 
     {0x57, NOTHING, NOTHING}, // F11
     {0x58, NOTHING, NOTHING}// F12
 };
