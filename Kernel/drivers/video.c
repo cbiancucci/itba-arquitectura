@@ -9,9 +9,9 @@ static void video_print_char_at(uint16_t c, int row, int col);
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
 static void video_reset_color();
+static void video_clear_line(int row);
 
 void video_init(){
-	video_reset_cursor();
 	video_reset_color();
 	video_clear_screen();
 }
@@ -37,11 +37,26 @@ void video_set_font_background_color(video_color font, video_color background){
 }
 
 void video_clear_screen(){
-	for(int i = 0; i < SCREEN_WIDTH * SCREEN_HEIGHT; i++){
-		video_printc(' ');
+	for(int j = 0; j < SCREEN_WIDTH; j++){
+		for(int i = 0; i < SCREEN_HEIGHT; i++){
+			video_printc(' ');
+		}
 	}
 	video_reset_cursor();
 	video_update_screen_color();
+}
+
+static void video_clear_line(int row) {
+
+	for (int i = 0; i < SCREEN_WIDTH; i++) {
+		video_print_char_at(' ', row, i);
+	}
+
+	video_current_column = 0;
+}
+
+color_t video_get_color(){
+	return video_current_color;
 }
 
 // PRINT
@@ -81,6 +96,11 @@ static void video_print_char_at(uint16_t c, int row, int col){
 void video_print_new_line(){
 	video_current_column = 0;
 	video_current_row++;
+
+	if(video_current_row == SCREEN_HEIGHT) {
+		video_scroll();
+	}
+
 }
 
 static uint16_t video_get_full_char_from(int row, int col) {
