@@ -41,46 +41,14 @@ void * getStackBase()
 void * initializeKernelBinary()
 {
 
-	ncPrint("[Loading modules]");
-	ncNewline();
 	void * moduleAddresses[] = {
 		sampleCodeModuleAddress,
 		sampleDataModuleAddress
 	};
 
 	loadModules(&endOfKernelBinary, moduleAddresses);
-	ncPrint("[Done]");
-	ncNewline();
-	ncNewline();
-
 	clearBSS(&bss, &endOfKernel - &bss);
 
-	char buffer[10];
-
-	ncPrint("[x64BareBones]");
-	ncNewline();
-
-	ncPrint("[Initializing kernel's binary]");
-	ncNewline();
-
-	clearBSS(&bss, &endOfKernel - &bss);
-
-	ncPrint("  text: 0x");
-	ncPrintHex((uint64_t)&text);
-	ncNewline();
-	ncPrint("  rodata: 0x");
-	ncPrintHex((uint64_t)&rodata);
-	ncNewline();
-	ncPrint("  data: 0x");
-	ncPrintHex((uint64_t)&data);
-	ncNewline();
-	ncPrint("  bss: 0x");
-	ncPrintHex((uint64_t)&bss);
-	ncNewline();
-
-	ncPrint("[Done]");
-	ncNewline();
-	ncNewline();
 	return getStackBase();
 }
 
@@ -90,8 +58,6 @@ int main()
 	video_println("================================================================================");
 	video_println("                                - SARASA SARASA -                               ");
 	video_println("================================================================================");
-	video_println("");
-	video_println("");
 	
 	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
