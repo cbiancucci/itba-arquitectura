@@ -55,10 +55,18 @@ void * initializeKernelBinary()
 int main()
 {	
 	video_init();
-	video_println("================================================================================");
-	video_println("                                - SARASA SARASA -                               ");
-	video_println("================================================================================");
+	video_set_font_background_color(4, 0);
+                                                                               
+	video_print_string("\t\t\t\t\t   _____ ___    ____  ___   _____ ___ \n");
+	video_print_string("\t\t\t\t\t  / ___//   |  / __ \\/   | / ___//   |\n");
+	video_print_string("\t\t\t\t\t  \\__ \\/ /| | / /_/ / /| | \\__ \\/ /| |\n");
+	video_print_string("\t\t\t\t\t ___/ / ___ |/ _, _/ ___ |___/ / ___ |\n");
+	video_print_string("\t\t\t\t\t/____/_/  |_/_/ |_/_/  |_/____/_/  |_|\n");
 	
+	video_set_font_background_color(15, 0);
+	video_println(" ");
+	video_print_string("\t\t\t\t\t\t\t\t'Depende...'\n");
+
 	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
 }

@@ -54,6 +54,7 @@ void video_print_string(const char * string);
 void video_println(const char * string);
 void video_print_char(uint16_t c);
 void video_print_char_at(uint16_t c, int row, int col);
+void video_print_line();
 
 // COLOR
 void video_set_color(color_t color);

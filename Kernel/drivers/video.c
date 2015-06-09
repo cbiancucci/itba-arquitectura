@@ -90,6 +90,15 @@ void video_print_char_at(uint16_t c, int row, int col){
 	SCREEN_START[row * SCREEN_WIDTH + col] = c;
 }
 
+void video_print_line(){
+	for(int i = 0; video_current_column < SCREEN_WIDTH; i++){
+		video_printc(' ');
+		video_current_column = i;
+	}
+	video_reset_current_column();
+	video_current_row++;
+}
+
 void video_print_new_line(){
 	video_reset_current_column();
 	video_current_row++;
