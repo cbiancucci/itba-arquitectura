@@ -11,10 +11,10 @@ if [[ "$1" = "linux" ]]; then
 	echo "Reseteando variables..."
 elif [[ "$1" == "macos" ]]; then
 	#statements
-	export GCC=/Users/cpbiancucci/Cross64/bin/x86_64-elf-gcc
-	export GPP=/Users/cpbiancucci/Cross64/bin/x86_64-elf-g++
-	export LD=/Users/cpbiancucci/Cross64/bin/x86_64-elf-ld
-	export AR=/Users/cpbiancucci/Cross64/bin/x86_64-elf-ar
+	export GCC=$HOME/Cross64/bin/x86_64-elf-gcc
+	export GPP=$HOME/Cross64/bin/x86_64-elf-g++
+	export LD=$HOME/Cross64/bin/x86_64-elf-ld
+	export AR=$HOME/Cross64/bin/x86_64-elf-ar
 	export ASM=/usr/local/bin/nasm
 	export MACOS=1
 
