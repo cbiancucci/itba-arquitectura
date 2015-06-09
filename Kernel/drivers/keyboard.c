@@ -1,5 +1,4 @@
 #include <keyboard.h>
-#include <enums.h>
 
 static kb_layout layout = KB_ENG;
 

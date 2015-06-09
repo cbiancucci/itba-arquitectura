@@ -1,3 +1,5 @@
+#include <definitions.h>
+
 typedef struct {
 	bool alt;
 	bool shift;

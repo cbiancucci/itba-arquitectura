@@ -38,12 +38,12 @@ set_interrupt_handlers:
 		mov 		rax, keyboard
 		call 		create_gate
 
-		mov 		rdi, x80
+		mov 		rdi, 0x80
 		mov 		rax, software_interruptions
 		call		create_gate
 
 		mov		rdi, 0x20
-		mov		rax, prog_interv_timer
+		mov		rax, prog_interval_timer
 		call		create_gate
 
 		ret
