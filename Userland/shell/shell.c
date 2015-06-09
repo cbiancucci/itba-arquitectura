@@ -15,6 +15,14 @@ extern char endOfBinary;
 static int commandCount = 6;
 static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver"};
 
+// COMMANDS
+void print_command(int argc, char** argv);
+void help_command(int argc, char** argv, char** cmd_list, int cmd_count);
+void time_command(int argc, char** argv);
+void screensaver_command(int argc, char** argv);
+void exit_command();
+void clear_command(int argc);
+
 void parseCommand(char* commandBuffer);
 
 int main() {
@@ -47,10 +55,15 @@ void parseCommand(char* commandBuffer) {
 		LTRIM(commandBuffer);
 	}
 
+
 	while (*commandBuffer != 0) {
 		argv[argc] = calloc(CMD_BUFFER_SIZE * sizeof(char));
 
+		char* pos = argv[argc];
+
 		while ((*commandBuffer != ' ') && *commandBuffer != 0) {
+			*pos = *commandBuffer;
+			pos++;
 			commandBuffer++;
 		}
 
@@ -59,11 +72,10 @@ void parseCommand(char* commandBuffer) {
 		}
 
 		argc++;
-
 	}
 
 	int commandIdx = 0;
-
+	
 	for (; commandIdx < commandCount; commandIdx++) {
 		if (strcmp(argv[0], commandList[commandIdx]) == 0) {
 			break;
@@ -73,27 +85,27 @@ void parseCommand(char* commandBuffer) {
 	switch (commandIdx) {
 
 	case 0: //print
-		//command_echo(argc, argv);
+		print_command(argc, argv);
 		break;
 
 	case 1: //help
-		//command_help(argc, argv, commandList, commandCount);
+		help_command(argc, argv, commandList, commandCount);
 		break;
 
 	case 2: //time
-		//command_time(argc, argv);
+		time_command(argc, argv);
 		break;
 
 	case 3: //exit
-		//command_exit();
+		exit_command();
 		break;
 
 	case 4: //clear
-		//command_clear(argc);
+		clear_command(argc);
 		break;
 
 	case 5: //screensaver
-		//command_screensaver(argc, argv);
+		screensaver_command(argc, argv);
 		break;
 
 	default:
@@ -101,4 +113,35 @@ void parseCommand(char* commandBuffer) {
 		printf("Command not found.");
 	}
 
+}
+
+void print_command(int argc, char** argv) {
+	if (argc != 1) {
+		for (int i = 1; i < argc; i++) {
+			printf("%s ", argv[i]);
+		}
+	} else {
+		printf("\n");
+	}
+}
+
+void help_command(int argc, char** argv, char** cmd_list, int cmd_count) {
+
+}
+
+void time_command(int argc, char** argv) {
+
+}
+
+void screensaver_command(int argc, char** argv) {
+
+}
+
+void exit_command() {
+	clear_screen();
+	exit();
+}
+
+void clear_command(int argc) {
+	clear_screen();
 }

@@ -98,6 +98,9 @@ software_interruptions:									; Interrupciones de software, int 80h
 		cmp 		rdi, 	10
 		jz 			int_keyboard_replace_buffer
 
+		cmp			rdi,	17
+		jz			int_sys_clear_screen
+
 		cmp			rdi,	18
 		jz			hang
 
@@ -116,10 +119,12 @@ int_malloc:
 		call 		prepare_params
 		call 		sys_malloc
 		jmp 		soft_interrupt_done
+
 int_calloc:
 		call 		prepare_params
 		call 		sys_calloc
 		jmp 		soft_interrupt_done
+
 int_free:
 		call 		prepare_params
 		call 		sys_free
@@ -129,6 +134,11 @@ int_keyboard_replace_buffer:
 		call 		prepare_params
 		call 		sys_keyboard_replace_buffer
 		jmp 		soft_interrupt_done
+
+int_sys_clear_screen:
+		call 		prepare_params
+		call 		sys_clear_screen
+		jmp			soft_interrupt_done
 
 soft_interrupt_done:
 		push 		rax

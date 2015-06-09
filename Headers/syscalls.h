@@ -3,12 +3,7 @@
 #define SYSCALLS_HEADER
 
 #include <definitions.h>
-/*
-#define SYSCALL_EXIT						0
-#define SYSCALL_READ						1
-#define SYSCALL_WRITE						2
-#define SYSCALL_CLEAR_SCREEN				3
-*/
+
 #define SYSCALL_RTC							1
 #define SYSCALL_RTC_SET						2
 #define SYSCALL_READ						3

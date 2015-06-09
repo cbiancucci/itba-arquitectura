@@ -235,3 +235,11 @@ char* itoc(int number) {
 	return c;
 
 }
+
+void clear_screen() {
+	sys_clear_screen();
+}
+
+void exit() {
+	sys_exit();
+}

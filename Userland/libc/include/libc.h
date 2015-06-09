@@ -18,6 +18,8 @@ int strlen(char* str);
 int getchar();
 int scanf(char* c, int len);
 char* itoc(int number);
+void clear_screen();
+void exit();
 /*
 
 
