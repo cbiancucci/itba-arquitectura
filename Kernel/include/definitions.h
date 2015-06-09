@@ -17,6 +17,8 @@
 
 #define EOF 	-1
 
+typedef char bool;
+
 /* File descriptors */
 typedef enum {
 	STDOUT,

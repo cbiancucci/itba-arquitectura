@@ -11,7 +11,6 @@ loader:
 	call init_pic
 	call main
 hang:
-	cli
 	hlt
 	jmp hang
 
@@ -46,13 +45,12 @@ set_interrupt_handlers:
 		mov		rax, prog_interval_timer
 		call		create_gate
 
+
 		ret
 
+align 16
 software_interruptions:
 		push rdi
-		
-		;cmp rdi, 1
-		;jz sys_
 		
 		pop rdi
 		ret
@@ -69,6 +67,7 @@ prog_interval_timer:
 
 		ret
 
+align 16
 keyboard:
 		push 		rdi
 		push 		rax

@@ -1,4 +1,5 @@
 #include <keyboard.h>
+#include <video.h>
 
 static kb_layout layout = KB_ENG;
 
@@ -15,5 +16,5 @@ code kb_codes[2][60] = {
 };
 
 void keyboard_handler(uint64_t s) {
-
+	video_println("HOLA");
 }
