@@ -47,6 +47,7 @@ void video_init();
 void video_reset_cursor();
 void video_clear_screen();
 
+// PRINT
 void video_printc(const char c);
 void video_print_new_line();
 void video_print_string(const char * string);
@@ -54,6 +55,7 @@ void video_println(const char * string);
 void video_print_char(uint16_t c);
 void video_print_char_at(uint16_t c, int row, int col);
 
+// COLOR
 void video_set_color(color_t color);
 void video_update_screen_color();
 void video_set_font_background_color(video_color font, video_color background);
