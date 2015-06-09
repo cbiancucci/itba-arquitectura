@@ -3,12 +3,12 @@
 #include <syscalls.h>
 #include <libc.h>
 
-void* calloc(int len) {
-	return sys_calloc(len);
+void* calloc(int length) {
+	return sys_calloc(length);
 }
 
-void* malloc(int len) {
-	return sys_malloc(len);
+void* malloc(int length) {
+	return sys_malloc(length);
 }
 
 static void vfprintf(FILE_DESCRIPTOR fd, char* fmt, va_list ap) {
@@ -187,9 +187,9 @@ int getchar() {
 	return (int) buffer[0];
 }
 
-int scanf(char* c, int len) {
+int scanf(char* c, int length) {
 
-	char read = sys_read(STDOUT, c, len);
+	char read = sys_read(STDOUT, c, length);
 
 	return read;
 }

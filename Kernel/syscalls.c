@@ -36,15 +36,15 @@ void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length){
 	video_print_string(string);
 }
 
-void* sys_malloc(int len) {
+void* sys_malloc(int lenght) {
 
-	return malloc(len);
+	return malloc(lenght);
 
 }
 
-void* sys_calloc(int len) {
+void* sys_calloc(int lenght) {
 
-	return calloc(len);
+	return calloc(lenght);
 
 }
 
@@ -52,8 +52,8 @@ void sys_free(void* m) {
 	free(m);
 }
 
-void sys_keyboard_replace_buffer(char* s) {
-	replaceLastWritten(s);
+void sys_keyboard_replace_buffer(char* string) {
+	replaceLastWritten(string);
 }
 
 void sys_clear_screen() {

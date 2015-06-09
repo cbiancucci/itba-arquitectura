@@ -17,9 +17,9 @@ typedef struct {
 	bool altON;
 } specialKeysStatus;
 
-int waitBuffer(int len);
+int waitBuffer(int length);
 char getCharFromBuffer();
-void keyboardHandler(uint64_t s);
-void replaceLastWritten(char* s);
+void keyboardHandler(uint64_t string);
+void replaceLastWritten(char* string);
 
 #endif

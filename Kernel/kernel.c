@@ -65,7 +65,7 @@ int main()
 	
 	video_set_font_background_color(15, 0);
 	video_println(" ");
-	video_print_string("\t\t\t\t\t\t\t\t'Depende...'\n");
+	video_print_string("\t\tMarcelo uso la primera computadora (y tambien nuestro Kernel)\n");
 
 	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;

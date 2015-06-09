@@ -8,8 +8,8 @@ void * memcpy(void * destination, const void * source, uint64_t length);
 
 char *cpuVendor(char *result);
 
-void* malloc(int len);
-void* calloc(int len);
+void* malloc(int length);
+void* calloc(int length);
 void free(void* m);
 
 #endif

@@ -143,18 +143,18 @@ static void deleteBuffer() {
     video_update_cursor();
 }
 
-void replaceLastWritten(char* s) {
+void replaceLastWritten(char* string) {
     enqueuePos = 0;
-    while (*s != 0) {
-        writeBuffer(*s);
-        s++;
+    while (*string != 0) {
+        writeBuffer(*string);
+        string++;
     }
 }
 
-int waitBuffer(int len) {
+int waitBuffer(int length) {
     enqueuePos = 0;
     EOF_READ = FALSE;
-    while (enqueuePos < len && !EOF_READ) ;
+    while (enqueuePos < length && !EOF_READ) ;
     return enqueuePos;
 }
 
@@ -171,52 +171,48 @@ static void writeChar(char c) {
     }
 }
 
-void keyboardHandler(uint64_t s) {
+void keyboardHandler(uint64_t string) {
     if (!screensaverWillActive && screensaverResetTimer()) {
         screensaverWillActive = FALSE;
         return;
     }
     
-    keyboardCode t = keyboardCodes[s];
+    keyboardCode t = keyboardCodes[string];
 
     if (t.ascii == NOTHING) {
 
-        switch (s) {
-        case 0x1c: // ENTER
-            EOF_READ = TRUE;
-            screensaverWillActive = TRUE;
-            break;
+        switch (string) {
+            case 0x1c: // ENTER
+                EOF_READ = TRUE;
+                screensaverWillActive = TRUE;
+                break;
 
-        case 0x0E: // BACKSPACE
-            deleteBuffer();
-            break;
+            case 0x0E: // BACKSPACE
+                deleteBuffer();
+                break;
 
-        case 0x3a: // CAPSLOCK
-            specialStatus.capsON = !specialStatus.capsON;
-            break;
+            case 0x3a: // CAPSLOCK
+                specialStatus.capsON = !specialStatus.capsON;
+                break;
 
-        case FIRST_BITE_ON(0x1c):
-            if (screensaverWillActive) {
-                screensaverWillActive = FALSE;
-                return;
-            }
+            case FIRST_BITE_ON(0x1c):
+                if (screensaverWillActive) {
+                    screensaverWillActive = FALSE;
+                    return;
+                }
+                break;
 
-            break;
+            case 0x2a:
+            case 0x36: // SHIFT
+                specialStatus.capsON = !specialStatus.capsON;
+                break;
 
-        case 0x2a:
-        case 0x36: // SHIFT
-            specialStatus.capsON = !specialStatus.capsON;
-            break;
-
-        case FIRST_BITE_ON(0x2a):
-        case FIRST_BITE_ON(0x36): //SHIFT
-            specialStatus.capsON = !specialStatus.capsON;
-            break;
-
+            case FIRST_BITE_ON(0x2a):
+            case FIRST_BITE_ON(0x36): //SHIFT
+                specialStatus.capsON = !specialStatus.capsON;
+                break;
         }
-
     } else {
-
         if (specialStatus.capsON) {
             writeChar(t.specialCharacter);
         } else {

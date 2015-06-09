@@ -10,13 +10,13 @@
 
 void printf(char* fmt, ...) __attribute__ ((format (printf, 1, 2)));
 void putchar(char c);
-void* calloc(int len);
-void* malloc(int len);
-int strcmp(const char* s1, const char* s2);
+void* calloc(int length);
+void* malloc(int length);
+int strcmp(const char* string1, const char* string2);
 void fprintf(FILE_DESCRIPTOR fd, char* fmt, ...) __attribute__ ((format (printf, 2, 3)));;
-int strlen(char* str);
+int strlen(char* string);
 int getchar();
-int scanf(char* c, int len);
+int scanf(char* c, int length);
 char* itoc(int number);
 void clear_screen();
 void exit();

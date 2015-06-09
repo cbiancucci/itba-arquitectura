@@ -31,10 +31,10 @@ void sys_clear_screen();
 
 void sys_rtc_get(time_t* t);
 void sys_rtc_set(time_t* t);
-void* sys_malloc(int len);
-void* sys_calloc(int len);
+void* sys_malloc(int length);
+void* sys_calloc(int length);
 void sys_free(void* m);
-void sys_keyboard_replace_buffer(char* s);
+void sys_keyboard_replace_buffer(char* string);
 void sys_set_screensaver_timer(uint64_t t);
 void sys_screensaver_trigger();
 void sys_exit();

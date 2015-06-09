@@ -4,20 +4,20 @@ static void* mallocBuffer = (void*)0x600000;
 
 static void* lastMalloc;
 
-void* malloc(int len) {
+void* malloc(int length) {
 
 	lastMalloc = mallocBuffer;
 
-	mallocBuffer += len * sizeof(void*);
+	mallocBuffer += length * sizeof(void*);
 
 	return lastMalloc;
 
 }
 
-void* calloc(int len) {
-	char* space = (char*)malloc(len);
+void* calloc(int length) {
+	char* space = (char*)malloc(length);
 
-	for (int i = 0; i < len; i++) {
+	for (int i = 0; i < length; i++) {
 		space[i] = (char)0;
 	}
 
