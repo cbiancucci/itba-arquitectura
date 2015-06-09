@@ -1,16 +1,24 @@
+include ../Makefile.variables
 include Makefile.inc
 
-all: sampleCodeModule sampleDataModule
+all: syscalls libc shellCodeModule shellDataModule
 
-sampleCodeModule:
-	cd SampleCodeModule; make
+shellCodeModule:
+	cd shell; make
 
-sampleDataModule:
-	printf "This is sample data." >> SampleDataModule.bin && dd if=/dev/zero bs=1 count=1 >> SampleDataModule.bin
+shellDataModule:
+	printf "This is sample data." >> shellDataModule.bin && dd if=/dev/zero bs=1 count=1 >> shellDataModule.bin
+
+libc:
+	cd libc; make
 
 clean:
-	cd SampleCodeModule; make clean
+	cd shell; make clean
+	cd syscalls; make clean
+	cd libc; make clean
 	rm -rf *.bin
 
+syscalls:
+	cd syscalls; make
 
-.PHONY: sampleCodeModule all clean
+.PHONY: syscalls libc shellCodeModule all clean

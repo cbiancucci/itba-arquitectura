@@ -4,6 +4,7 @@
 
 #include <stdint.h>
 #include <definitions.h>
+#include <io.h>
 
 #define SCREEN_START ((uint16_t*)0xB8000)
 
@@ -46,9 +47,20 @@ void video_printc(const char c);
 void video_print_new_line();
 void video_print_string(const char * string);
 void video_println(const char * string);
+void video_print_char(uint16_t c);
+void video_print_char_at(uint16_t c, int row, int col);
 
 void video_set_color(color_t color);
 void video_update_screen_color();
 void video_set_font_background_color(video_color font, video_color background);
+
+void video_update_cursor();
+
+bool screensaverResetTimer();
+
+void video_trigger_backup();
+void video_trigger_restore();
+void video_trigger_screensaver();
+void activeScreensaver();
 
 #endif

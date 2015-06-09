@@ -1,5 +1,37 @@
 #include <stdint.h>
 
+static void* mallocBuffer = (void*)0x600000;
+
+static void* lastMalloc;
+
+void* malloc(int len) {
+
+	lastMalloc = mallocBuffer;
+
+	mallocBuffer += len * sizeof(void*);
+
+	return lastMalloc;
+
+}
+
+void* calloc(int len) {
+	char* space = (char*)malloc(len);
+
+	for (int i = 0; i < len; i++) {
+		space[i] = (char)0;
+	}
+
+	return (void*)space;
+}
+
+void free(void* m) {
+
+	if (m == lastMalloc) {
+		mallocBuffer = m;
+	}
+
+}
+
 void * memset(void * destination, int32_t c, uint64_t length)
 {
 	uint8_t chr = (uint8_t)c;
@@ -11,6 +43,7 @@ void * memset(void * destination, int32_t c, uint64_t length)
 	return destination;
 }
 
+// REFERENCE: http://www.cs.usask.ca/classes/332/t1/os161/src/common/libc/string/memcpy.c
 void * memcpy(void * destination, const void * source, uint64_t length)
 {
 	/*

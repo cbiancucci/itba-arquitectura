@@ -15,7 +15,19 @@
 #define FALSE	0
 #define NULL	0
 
+typedef char bool;
+
 #define EOF 	-1
+
+/* REAL TIME CLOCK */
+typedef struct {
+	uint32_t year;
+	uint8_t month;
+	uint8_t day;
+	uint8_t hour;
+	uint8_t minute;
+	uint8_t second;
+} time_t;
 
 /* File descriptors */
 typedef enum {
@@ -39,7 +51,7 @@ typedef uint8_t color_t;
 #define BUFFER_SIZE		1024
 
 /* Shell prompt */
-#define PROMPT "sarasa$ "
+#define PROMPT "\nsarasa$ "
 
 
 #endif

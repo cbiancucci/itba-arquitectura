@@ -2,9 +2,25 @@
 #include <syscalls.h>
 #include <definitions.h>
 #include <video.h>
+#include <keyboard.h>
+#include <lib.h>
 
 int sys_read(FILE_DESCRIPTOR fileDescriptor, char * string, int length){
 	int read = 0;
+
+	int i = 0;
+
+	read = waitBuffer(length);
+
+	while (i < read) {
+		string[i] = getCharFromBuffer();
+
+		i++;
+
+	}
+
+	string[i] = 0;
+
 	return read;
 }
 
@@ -20,10 +36,26 @@ void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length){
 	video_print_string(string);
 }
 
-void sys_init_scree(){
-	video_init();
+void* sys_malloc(int len) {
+
+	return malloc(len);
+
 }
 
-void sys_clear_screen(){
+void* sys_calloc(int len) {
+
+	return calloc(len);
+
+}
+
+void sys_free(void* m) {
+	free(m);
+}
+
+void sys_keyboard_replace_buffer(char* s) {
+	replaceLastWritten(s);
+}
+
+void sys_clear_screen() {
 	video_clear_screen();
 }

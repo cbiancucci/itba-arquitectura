@@ -1,30 +1,34 @@
+include ../Makefile.variables
 include Makefile.inc
 
 KERNEL=kernel.bin
-SOURCES=drivers/keyboard.c $(wildcard *.c) drivers/video.c
-SOURCES_ASM=$(wildcard asm/*.asm)
+SOURCES=drivers/keyboard.c $(wildcard *.c) drivers/video.c drivers/realTimeClock.c
 OBJECTS=$(SOURCES:.c=.o)
-OBJECTS_ASM=$(SOURCES_ASM:.asm=.o)
-LOADERSRC=loader.asm
 
+LOADERSRC=loader.asm
 LOADEROBJECT=$(LOADERSRC:.asm=.o)
+
+IODRIVERSRC=drivers/io.asm
+IODRIVEROBJECT=$(IODRIVERSRC:.asm=.o)
+
 STATICLIBS=
 
 all: $(KERNEL)
 
-$(KERNEL): $(LOADEROBJECT) $(OBJECTS) $(STATICLIBS) $(OBJECTS_ASM)
-	$(LD) $(LDFLAGS) -T kernel.ld -o $(KERNEL) $(LOADEROBJECT) $(OBJECTS) $(OBJECTS_ASM) $(STATICLIBS)
+$(KERNEL): $(LOADEROBJECT) $(IODRIVEROBJECT) $(OBJECTS) $(STATICLIBS)
+	$(LD) $(LDFLAGS) -T kernel.ld -o $(KERNEL) $(LOADEROBJECT) $(IODRIVEROBJECT) $(OBJECTS) $(STATICLIBS)
 
 %.o: %.c
-	$(GCC) $(GCCFLAGS) -I./include -c $< -o $@
-
-%.o : %.asm
-	$(ASM) $(ASMFLAGS) $< -o $@
+	$(GCC) $(GCCFLAGS) -DMACOS=$(MACOS) -I./include -I../Headers -c $< -o $@
 
 $(LOADEROBJECT):
-	$(ASM) $(ASMFLAGS) $(LOADERSRC) -o $(LOADEROBJECT)
+	$(ASM) -felf64 $(LOADERSRC) -o $(LOADEROBJECT)
+
+$(IODRIVEROBJECT):
+	$(ASM) -felf64 $(IODRIVERSRC) -o $(IODRIVEROBJECT)
 
 clean:
-	rm -rf asm/*.o *.o *.bin
+	rm -rf *.o *.bin
+	rm -rf drivers/*.o 
 
 .PHONY: all clean

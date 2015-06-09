@@ -1,35 +1,60 @@
 global loader
-extern 	main
-extern 	initializeKernelBinary
-extern 	keyboard_handler
+extern main
+extern initializeKernelBinary
+
+extern 		main
+extern 		initializeKernelBinary
+
+extern		video_write_line
+extern 		video_write_nl
+extern 		keyboardHandler
+extern 		irq0_handler
+
+;SYSCALLS
+extern 		sys_write
+extern 		sys_read
+extern 		sys_malloc
+extern 		sys_calloc
+extern 		sys_free
+extern 		sys_keyboard_replace_buffer
+extern		sys_clear_screen
 
 loader:
-	call initializeKernelBinary	
-	mov rsp, rax				
-	push rax
-	call set_interrupt_handlers
-	call init_pic
-	call main
+
+		call 		initializeKernelBinary		; Set up the kernel binary, and get thet stack address
+
+		mov			rsp, 	rax					; Set up the stack with the returned address
+		push 		rax
+
+		call 		set_interrupt_handlers
+		call 		init_pic
+		call		main
+
+
 hang:
-	cli
-	hlt
-	jmp hang
+		cli
+		hlt										; halt machine should kernel return
+		jmp 		hang
+
+
+IDTR64:											; Interrupt Descriptor Table Register
+		dw 			256*16-1					; limit of IDT (size minus one) (4096 bytes - 1)
+		dq 			0x0000000000000000			; linear address of IDT
 
 create_gate:
 		push 		rdi
 		push 		rax
 
-		shl 		rdi,	4		
-		stosw		
+		shl 		rdi,	4					; quickly multiply rdi by 16
+		stosw									; store the low word (15..0)
 		shr 		rax, 	16
-		add 		rdi,	4	
-		stosw						
+		add 		rdi,	4					; skip the gate marker
+		stosw									; store the high word (31..16)
 		shr 		rax,	16
-		stosd					
+		stosd									; store the high dword (63..32)
 
 		pop 		rax
 		pop 		rdi
-
 		ret
 
 set_interrupt_handlers:
@@ -43,44 +68,117 @@ set_interrupt_handlers:
 		call		create_gate
 
 		mov		rdi, 0x20
-		mov		rax, prog_interval_timer
+		mov		rax, pit_handler
 		call		create_gate
 
+		lidt 		[IDTR64]					; load IDT register
+
 		ret
 
-software_interruptions:
-		push rdi
-		
-		;cmp rdi, 1
-		;jz sys_
-		
-		pop rdi
-		ret
+align 16
+software_interruptions:									; Interrupciones de software, int 80h
+		push 		rdi
+		;push 		rax
 
-get_params_ready:
+		cmp			rdi, 	1
+		jz 			int_sys_read
+
+		cmp			rdi, 	2
+		jz			int_sys_write
+
+		cmp 		rdi,	3
+		jz 			int_malloc
+
+		cmp 		rdi,	4
+		jz 			int_calloc
+
+		cmp 		rdi,	5
+		jz 			int_free
+
+		cmp 		rdi, 	6
+		jz 			int_keyboard_replace_buffer
+
+		cmp			rdi,	18
+		jz			hang
+
+		jmp 		soft_interrupt_done 		; La syscall no existe
+
+int_sys_write:
+		call 		prepare_params
+		call 		sys_write
+		jmp 		soft_interrupt_done
+int_sys_read:
+		call 		prepare_params
+		call 		sys_read
+		jmp 		soft_interrupt_done
+
+int_malloc:
+		call 		prepare_params
+		call 		sys_malloc
+		jmp 		soft_interrupt_done
+int_calloc:
+		call 		prepare_params
+		call 		sys_calloc
+		jmp 		soft_interrupt_done
+int_free:
+		call 		prepare_params
+		call 		sys_free
+		jmp 		soft_interrupt_done
+
+int_keyboard_replace_buffer:
+		call 		prepare_params
+		call 		sys_keyboard_replace_buffer
+		jmp 		soft_interrupt_done
+
+soft_interrupt_done:
+		push 		rax
+		mov 		al, 	0x20				; Acknowledge the IRQ
+		out 		0x20, 	al
+
+		pop 		rax
+		pop 		rdi
+		iretq
+
+prepare_params:
 		mov 		rdi,	rsi
 		mov 		rsi,	rdx
 		mov 		rdx,	rcx
-		mov		rcx,	r8
+		mov			rcx,	r8
 
 		ret
 
-prog_interval_timer:
+pit_handler:
+		push 		rdi
+		push 		rax
 
-		ret
+		call 		irq0_handler
 
+		mov			al, 	0x20				; Acknowledge the IRQ
+		out 		0x20, 	al
+
+		pop 		rax
+		pop 		rdi
+		iretq
+
+align 16
 keyboard:
 		push 		rdi
 		push 		rax
 
-		xor		eax, eax
+		xor			eax, 	eax
 
-		in 		al, 0x60				
+		in 			al, 	0x60				; Get the scancode from the keyboard
 
 		mov 		rdi,	 rax
-		call 		keyboard_handler
+		call 		keyboardHandler
 
-		ret
+keyboard_done:
+		mov			al, 	0x20				; Acknowledge the IRQ
+		out 		0x20, 	al
+
+		pop 		rax
+		pop 		rdi
+		iretq
 
 init_pic:
 	; Enable specific interrupts

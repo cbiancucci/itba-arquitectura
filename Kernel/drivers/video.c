@@ -4,8 +4,6 @@ int video_current_row = 0;
 int video_current_column = 0;
 static color_t video_current_color = 0;
 
-static void video_print_char(uint16_t c);
-static void video_print_char_at(uint16_t c, int row, int col);
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
 static void video_reset_color();
@@ -67,7 +65,7 @@ void video_printc(const char c){
 	video_print_char(char_16 | (color_16 << 8));
 }
 
-static void video_print_char(uint16_t c) {
+void video_print_char(uint16_t c) {
 
 	video_print_char_at(c, video_current_row, video_current_column);
 
@@ -89,7 +87,7 @@ static void video_print_char(uint16_t c) {
 	}
 }
 
-static void video_print_char_at(uint16_t c, int row, int col){
+void video_print_char_at(uint16_t c, int row, int col){
 	SCREEN_START[row * SCREEN_WIDTH + col] = c;
 }
 
@@ -125,7 +123,7 @@ void video_print_string(const char * string) {
 		string++;
 	}
 
-	//video_update_cursor();
+	video_update_cursor();
 }
 
 void video_println(const char * string){
@@ -157,4 +155,15 @@ static void video_scroll(){
 	video_current_row--;
 	video_current_column = 0;
 	video_update_screen_color();
+}
+
+// REFERENCE: http://wiki.osdev.org/Text_Mode_Cursor
+void video_update_cursor() {
+	unsigned short position = (video_current_row * 80) + video_current_column;
+	// cursor LOW port to vga INDEX register
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (unsigned char)(position & 0xFF));
+	// cursor HIGH port to vga INDEX register
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (unsigned char )((position >> 8) & 0xFF));
 }

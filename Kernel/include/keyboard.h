@@ -1,22 +1,25 @@
+#ifndef KEYBOARD_HEADER
+#define KEYBOARD_HEADER
+
 #include <definitions.h>
 
-typedef struct {
-	bool alt;
-	bool shift;
-	bool ctrl;
-
-} kb_status;
+#define KEYBOARD_BUFFER_SIZE 128
 
 typedef struct {
-	char code;
+	char scancode;
 	char ascii;
-	char shifted;
-} code;
+	char specialCharacter;
+} keyboardCode;
 
-typedef enum {
-	KB_ENG,
-	KB_SPA
-} kb_layout;
+typedef struct {
+	bool capsON;
+	bool ctrlON;
+	bool altON;
+} specialKeysStatus;
 
+int waitBuffer(int len);
+char getCharFromBuffer();
+void keyboardHandler(uint64_t s);
+void replaceLastWritten(char* s);
 
-void keyboard_handler(uint64_t s);
+#endif
