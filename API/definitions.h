@@ -38,4 +38,6 @@ typedef enum {
 /** VIDEO ATTRIBUTES **/
 typedef uint8_t color_t;
 
+#define PROMPT "\nsarasa$ "
+
 #endif

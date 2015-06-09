@@ -1,7 +1,6 @@
 #include <stdint.h>
 #include <syscalls.h>
 #include <libc.h>
-
 #include <definitions.h>
 
 #define MAX_ARGS 				256
@@ -30,18 +29,15 @@ int main() {
 	static char buffer[CMD_BUFFER_SIZE] = {0};
 
 	while (1) {
-		printf("\nsarasa$ ");
+		printf(PROMPT);
 
 		if (scanf(buffer, CMD_BUFFER_SIZE) == 0) {
 			continue;
 		}
 
 		putchar('\n');
-
 		parseCommand(buffer);
-
 	}
-
 	return 0xDEADBEEF;
 }
 
@@ -108,7 +104,6 @@ void parseCommand(char* commandBuffer) {
 		break;
 
 	default:
-
 		printf("El comando no fue encontrado.");
 	}
 
