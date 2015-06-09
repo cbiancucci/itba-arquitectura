@@ -54,7 +54,6 @@ void parseCommand(char* commandBuffer) {
 			commandBuffer++;
 		}
 
-		//si al argumento le siguen espacios los limpiamos
 		if (*commandBuffer == ' ') {
 			LTRIM(commandBuffer);
 		}

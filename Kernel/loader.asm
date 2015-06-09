@@ -80,22 +80,22 @@ software_interruptions:									; Interrupciones de software, int 80h
 		push 		rdi
 		;push 		rax
 
-		cmp			rdi, 	1
+		cmp			rdi, 	3
 		jz 			int_sys_read
 
-		cmp			rdi, 	2
+		cmp			rdi, 	4
 		jz			int_sys_write
 
-		cmp 		rdi,	3
+		cmp 		rdi,	5
 		jz 			int_malloc
 
-		cmp 		rdi,	4
+		cmp 		rdi,	6
 		jz 			int_calloc
 
-		cmp 		rdi,	5
+		cmp 		rdi,	7
 		jz 			int_free
 
-		cmp 		rdi, 	6
+		cmp 		rdi, 	10
 		jz 			int_keyboard_replace_buffer
 
 		cmp			rdi,	18
@@ -159,7 +159,6 @@ pit_handler:
 		pop 		rax
 		pop 		rdi
 		iretq
-
 align 16
 keyboard:
 		push 		rdi
