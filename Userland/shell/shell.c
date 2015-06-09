@@ -127,7 +127,7 @@ void print_command(int argc, char** argv) {
 void help_command(int argc, char** argv) {
 	// Si vino solo help, listo todos los comandos 
 	if (argc == 1) {
-		printf("Sarasa v1.0.0 (x64). GNU bash, version 0.0.1\n");
+		printf("\nSarasa v1.0.0 (x64). GNU bash, version 0.0.1\n");
 		printf("Desarrollado para ARQUITECTURA DE LAS COMPUTADORAS.\n");
 		printf("@Zeitzen @matiasgualino @cbiancucci\n");
 		printf("\nComandos disponibles:\n");
@@ -151,39 +151,41 @@ void help_command(int argc, char** argv) {
 		switch (cmd) {
 
 		case 0: // PRINT
-			printf("\t PRINT Imprime un mensaje en pantalla, soportando espacios.\n");
-			printf(" Ej: print Este es el TP de arqui, imprime el texto 'Este es el TP de arqui' en la pantalla.\n");
+			printf("\n PRINT Imprime un mensaje en pantalla, soportando espacios.\n");
+			printf(" Uso: print [MENSAJE]\n");
+			printf(" Ejemplo: print Este es el TP de arqui\n Se imprime el texto 'Este es el TP de arqui' en la pantalla.\n");
 			break;
 
 		case 1: // HELP
-			printf("\t HELP Describe cada uno de los comandos disponibles en Sarasa.\n");
-			printf("Si queres tener mas informacion de algun comando, proba con 'help COMANDO'\n");
+			printf("\n HELP Describe cada uno de los comandos disponibles en Sarasa.\n");
+			printf(" Para mas informacion de cada comando utilizar 'help [COMANDO]'\n");
 			break;
 
 		case 2: // TIME
-			printf("\t TIME Permite consultar o indicar la hora del sistema.\n");
-			printf("\tPodes indicarle a Sarasa la fecha y hora que desees a traves del comando 'time set HORAS MINUTOS SEGUNDOS DIA MES AÑO'\n");
-			printf("\tAÑO debe tener 1 o 2 digitos y se le sumara 2000.\n");
-			printf(" Ej: time set 18 30 32 10 6 15 setea la hora a las 18:30:32 del 10/06/2015.\n");
+			printf("\n TIME Permite consultar o indicar la hora del sistema.\n");
+			printf(" Uso: time set [HORAS] [MINUTOS] [SEGUNDOS] [DIA] [MES] [ANO]\n");
+			printf(" Ejemplo: time set 18 30 32 10 6 15\n Configura la hora a las 18:30:32 del 10/06/2015.\n");
+			printf(" * [ANO] soporta 2 digitos. Se suma 2000 de forma autmatica.\n");
 			break;
 
 		case 3: // EXIT
-			printf("\t EXIT Finaliza el sistema.\n");
+			printf("\n EXIT Finaliza el sistema.\n");
 			break;
 
 		case 4: // CLEAR
-			printf("\t CLEAR Cuando ya probaste mucho sarasa y no tenes mucho texto, este comando te ayuda a limpiar la pantalla para que puedas trabajar mas comodo\n");
+			printf("\n CLEAR Limpia la pantalla.\n");
+			printf(" Cuando ya probaste mucho sarasa este comando te ayuda a limpiar la pantalla\n para que puedas trabajar mas comodo.\n");
 			break;
 
 		case 5: //screensaver
-			printf("\t SCREENSAVER Activa el salvapantallas.\n");
-			printf("\t Si queres configurar el tiempo que tarde el salvapantallas en activarse, podes hacerlo con 'screensaver set TIEMPO_EN_SEGUNDOS'.");
+			printf("\n SCREENSAVER Activa el salvapantallas.\n");
+			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
 			break;
 		default:
-			printf("\nEl comando no esta disponible en sarasa.\n");
+			printf("\n El comando no esta disponible en sarasa (proximamente...).\n");
 		}
 	} else {
-		printf("\nLos comandos en Sarasa constan de una palabra.\n");
+		printf("\n Los comandos en Sarasa constan de una palabra (los desarrolladores son vagos).\n");
 	}
 }
 
