@@ -183,10 +183,91 @@ void keyboardHandler(uint64_t string) {
 
         switch (string) {
             case 0x1c: // ENTER
-                EOF_READ = TRUE;
-                screensaverWillActive = TRUE;
-                break;
 
+				oldCommandsCount++;
+
+				//muevo todos los comandos 1+ para atras
+				int i;
+				for(i = 9; i >= 0; i--)
+					oldCommands[i+1] = oldCommands[i];
+
+		        char aux[KEYBOARD_BUFFER_SIZE] = {0};
+				for(i=0; i<KEYBOARD_BUFFER_SIZE; i++)
+					aux[i] = buffer[i];
+				// Pongo el nuevo comando primero
+				oldCommands[0] = aux;
+				
+				currentCommandSelected = -1;
+				temporaryCommand = "";
+
+	            EOF_READ = TRUE;
+	            screensaverWillActive = TRUE;
+	            break;
+
+			case 0xC8: // UP ARROW
+
+	        	//cambiar el 9 por OldCommandCount depues del testing
+	        	if(currentCommandSelected < 9){
+	        		
+		    		//delete all
+		    		while(enqueuePos != 0)
+		    			deleteBuffer();
+
+	        		if(currentCommandSelected == -1){
+	        			char aux[KEYBOARD_BUFFER_SIZE] = {0};
+	        			int i;
+	        			for(i=0; i<KEYBOARD_BUFFER_SIZE; i++)
+	        				aux[i] = buffer[i];
+	        			temporaryCommand = aux;
+					}
+					
+					currentCommandSelected++;
+		    		char* thisCommand = oldCommands[currentCommandSelected];
+		    		
+		    		int i = 0;
+		    		while(*thisCommand){
+		    			buffer[i] = *thisCommand;
+		    			i++;
+		    			thisCommand++;
+		    		}
+		    		int j;
+		    		for(j=0; j < i; j++){
+		    			writeChar(buffer[j]);
+					}
+					video_update_cursor();
+			
+	        	}
+	        	break;
+        	case 0xD0: // DOWN ARROW
+	        	if(currentCommandSelected > -1){
+
+	   	    		//delete all
+		    		while(enqueuePos != 0)
+		    			deleteBuffer();
+
+	        		currentCommandSelected--;
+	        		char* thisCommand;
+	        		if(currentCommandSelected == -1){
+	        			thisCommand = temporaryCommand;
+	        		}else{
+		    			thisCommand = oldCommands[currentCommandSelected];
+	        		}
+
+
+		    		int i = 0;
+		    		while(*thisCommand){
+		    			buffer[i] = *thisCommand;
+		    			i++;
+		    			thisCommand++;
+		    		}
+		    		int j;
+		    		for(j=0; j < i; j++){
+		    			writeChar(buffer[j]);
+					}
+					video_update_cursor();
+
+	        	}
+	        	break;
             case 0x0E: // BACKSPACE
                 deleteBuffer();
                 break;
