@@ -20,7 +20,7 @@ static bool EOF_READ = FALSE;
 static specialKeysStatus specialStatus = { FALSE, FALSE, FALSE }; // CAPS, CTRL, ALT
 
 static int oldCommandsCount = 0;
-static char* oldCommands[10] = {"0","1","2","3","4","5","6","7","8","9"};
+static char* oldCommands[10] = {"","","","","","","","","",""};
 static char* temporaryCommand;
 static int currentCommandSelected = -1;
 
@@ -192,13 +192,14 @@ void keyboardHandler(uint64_t string) {
 				oldCommandsCount++;
 
 				//muevo todos los comandos 1+ para atras
-				int i;
-				for(i = 9; i >= 0; i--)
+				for(int i = 8; i >= 0; i--){
 					oldCommands[i+1] = oldCommands[i];
+                }
 
 		        char aux[KEYBOARD_BUFFER_SIZE] = {0};
-				for(i=0; i<KEYBOARD_BUFFER_SIZE; i++)
+				for(int i = 0; i < KEYBOARD_BUFFER_SIZE; i++){
 					aux[i] = buffer[i];
+                }
 				// Pongo el nuevo comando primero
 				oldCommands[0] = aux;
 				
@@ -211,18 +212,19 @@ void keyboardHandler(uint64_t string) {
 
 			case 0xC8: // UP ARROW
 
-	        	//cambiar el 9 por OldCommandCount depues del testing
-	        	if(currentCommandSelected < 9){
+	        	if(currentCommandSelected < oldCommandsCount){
 	        		
 		    		//delete all
-		    		while(enqueuePos != 0)
+		    		while(enqueuePos != 0){
 		    			deleteBuffer();
+                    }
 
 	        		if(currentCommandSelected == -1){
 	        			char aux[KEYBOARD_BUFFER_SIZE] = {0};
-	        			int i;
-	        			for(i=0; i<KEYBOARD_BUFFER_SIZE; i++)
+	        			
+	        			for(int i = 0; i < KEYBOARD_BUFFER_SIZE; i++){
 	        				aux[i] = buffer[i];
+                        }
 	        			temporaryCommand = aux;
 					}
 					
@@ -235,8 +237,8 @@ void keyboardHandler(uint64_t string) {
 		    			i++;
 		    			thisCommand++;
 		    		}
-		    		int j;
-		    		for(j=0; j < i; j++){
+		    		
+		    		for(int j = 0; j < i; j++){
 		    			writeChar(buffer[j]);
 					}
 					video_update_cursor();
