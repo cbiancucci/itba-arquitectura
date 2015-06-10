@@ -18,8 +18,8 @@
 #define SYSCALL_SET_COLOR					12
 #define SYSCALL_SET_TIME					13
 #define SYSCALL_SET_KBD_DISTRIBUTION		14
-#define SYSCALL_SCREENSAVER_TIMER			15
-#define SYSCALL_SCREENSAVER_TRIGGER			16
+#define SYSCALL_DELAY_SCREENSAVER			15
+#define SYSCALL_SHOW_SCREENSAVER			16
 #define SYSCALL_CLEAR_SCREEN				17
 #define SYSCALL_EXIT						18
 
@@ -35,8 +35,8 @@ void* sys_malloc(int length);
 void* sys_calloc(int length);
 void sys_free(void* m);
 void sys_keyboard_replace_buffer(char* string);
-void sys_set_screensaver_timer(uint64_t t);
-void sys_screensaver_trigger();
+void sys_set_delay_screensaver(uint64_t t);
+void sys_show_screensaver();
 void sys_exit();
 
 

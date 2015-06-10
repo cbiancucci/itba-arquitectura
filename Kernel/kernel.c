@@ -15,7 +15,7 @@ extern uint8_t endOfKernel;
 
 static const uint64_t PageSize = 0x1000;
 static uint64_t pitTimer = 0;
-uint64_t screensaverWaitTime = 20;
+uint64_t screensaverWaitTime = 10;
 uint64_t screensaverTimer = 0;
 bool screensaverActive = FALSE;
 
@@ -55,6 +55,9 @@ void * initializeKernelBinary()
 int main()
 {	
 	video_init();
+
+	screensaverResetTimer();
+
 	video_set_font_background_color(4, 0);
                                                                                
 	video_print_string("\t\t\t\t\t   _____ ___    ____  ___   _____ ___ \n");
@@ -77,7 +80,7 @@ void irq0_handler() {
 	screensaverTimer--;
 
 	if (screensaverTimer == 0 && !screensaverActive) {
-	//	activeScreensaver();
+		activeScreensaver();
 	}
 
 }
@@ -87,7 +90,7 @@ bool screensaverResetTimer() {
 	if (screensaverActive) {
 		ret = TRUE;
 		screensaverActive = FALSE;
-		//video_trigger_restore();
+		video_trigger_restore();
 	}
 	screensaverTimer = 18 * screensaverWaitTime;
 	return ret;
@@ -95,5 +98,5 @@ bool screensaverResetTimer() {
 
 void activeScreensaver() {
 	screensaverActive = TRUE;
-	//video_trigger_screensaver();
+	video_trigger_screensaver();
 }
