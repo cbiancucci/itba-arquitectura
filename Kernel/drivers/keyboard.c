@@ -19,6 +19,11 @@ static bool EOF_READ = FALSE;
 
 static specialKeysStatus specialStatus = { FALSE, FALSE, FALSE }; // CAPS, CTRL, ALT
 
+static int oldCommandsCount = 0;
+static char* oldCommands[10] = {"0","1","2","3","4","5","6","7","8","9"};
+static char* temporaryCommand;
+static int currentCommandSelected = -1;
+
 #define NOTHING (char)0
 
 static bool screensaverWillActive = FALSE;
