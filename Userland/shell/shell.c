@@ -194,11 +194,11 @@ void time_command(int argc, char** argv) {
 		char* saludo;
 		saludo = "Buenos dias.";
 		if ((t->hour > 12) && (t->hour < 20)) {
-			saludo = "Buenas tardes.";
+			saludo = " Buenas tardes.\n";
 		} else if ((t->hour >= 20) && (t->hour <= 23)) {
-			saludo = "Buenas noches.";
+			saludo = " Buenas noches.\n";
 		} else if ((t->hour >= 0) && (t->hour <= 8)) {
-			saludo = "Madrugador!";
+			saludo = " Madrugador!\n";
 		}
 		printf("%s Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", saludo, t->day, t->month, t->year, t->hour, t->minute, t->second);
 	} else if (argc == 8) {
