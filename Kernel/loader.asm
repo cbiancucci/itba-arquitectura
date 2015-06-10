@@ -5,8 +5,6 @@ extern initializeKernelBinary
 extern 		main
 extern 		initializeKernelBinary
 
-extern		video_write_line
-extern 		video_write_nl
 extern 		keyboardHandler
 extern 		irq0_handler
 
@@ -104,19 +102,19 @@ software_interruptions:							; Interrupciones de software, int 80h
 		cmp 		rdi, 7
 		jz 			int_free
 
-		cmp 		rdi, 10
+		cmp 		rdi, 8
 		jz 			int_keyboard_replace_buffer
 
-		cmp 		rdi, 	15
+		cmp 		rdi, 	9
 		jz 			int_sys_set_delay_screensaver
 
-		cmp 		rdi, 	16
+		cmp 		rdi, 	10
 		jz 			int_sys_show_screensaver
 
-		cmp			rdi, 17
+		cmp			rdi, 11
 		jz			int_sys_clear_screen
 
-		cmp			rdi, 18
+		cmp			rdi, 12
 		jz			hang
 
 		jmp 		soft_interrupt_done 		; La syscall no existe

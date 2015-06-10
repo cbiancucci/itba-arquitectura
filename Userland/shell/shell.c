@@ -24,7 +24,7 @@ void clear_command();
 
 void parseCommand(char* commandBuffer);
 
-static int checkDate(int hour, int minute, int second, int day, int month, int year);
+int stringToInt(char* str);
 
 int main() {
 
@@ -101,7 +101,7 @@ void parseCommand(char* commandBuffer) {
 		clear_command();
 		break;
 
-	case 5: //screensaver
+	case 5: // SCREENSAVER
 		screensaver_command(argc, argv);
 		break;
 
@@ -174,7 +174,7 @@ void help_command(int argc, char** argv) {
 			printf(" Cuando ya probaste mucho sarasa este comando te ayuda a limpiar la pantalla\n para que puedas trabajar mas comodo.\n");
 			break;
 
-		case 5: //screensaver
+		case 5: // SCREENSAVER
 			printf("\n SCREENSAVER Activa el salvapantallas.\n");
 			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
 			break;
@@ -189,9 +189,14 @@ void help_command(int argc, char** argv) {
 void time_command(int argc, char** argv) {
 	time_t* t;
 	t = time();
-	
+	char* saludo;
+	int hour;
+	int minute;
+	int second;
+	int day;
+	int month;
+	int year;
 	if (argc == 1) {
-		char* saludo;
 		saludo = "Buenos dias.";
 		if ((t->hour > 12) && (t->hour < 20)) {
 			saludo = "Buenas tardes.";
@@ -202,9 +207,54 @@ void time_command(int argc, char** argv) {
 		}
 		printf("%s Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", saludo, t->day, t->month, t->year, t->hour, t->minute, t->second);
 	} else if (argc == 8) {
-		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+		if (strcmp(argv[1], "set") == 0) {
+			bool error;
+			error = FALSE;
+
+			hour = ctoi(argv[2]);
+			minute = ctoi(argv[3]);
+			second = ctoi(argv[4]);
+			day = ctoi(argv[5]);
+			month = ctoi(argv[6]);
+			year = ctoi(argv[7]);
+
+			if (hour > 23 || hour < 0) {
+				printf("La hora no es valida.\n");
+				error = TRUE;
+			}
+			if (minute > 59 || minute < 0) {
+				printf("El mes no es valido.\n");
+				error = TRUE;
+			}
+			if (second > 59 || second < 0) {
+				printf("Los segundos no son validos.\n");
+				error = TRUE;
+			}
+			if (day > 31 || day <= 0) {
+				printf("El dia no es valido.\n");
+				error = TRUE;
+			}
+			if (month > 12 || month <= 0) {
+				printf("El mes no es valido.\n");
+				error = TRUE;
+			}
+			if (year < 0 || year > 99) {
+				printf("El ano no es valido.\n");
+				error = TRUE;
+			} 
+
+			if (error == FALSE) {
+				t->hour = hour;
+				t->minute = minute;
+				t->second = second;
+				t->day = day;
+				t->month = month;
+				t->year = year;
+				set_time(t);
+			}
+		}
 	} else {
-		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+		printf("Comando invalido. El comando TIME solo es valido solo o acompanado de set y los valores correspondientes a la fecha y hora que se desea setear.\n");
 	}
 }
 
@@ -249,23 +299,4 @@ void exit_command() {
 
 void clear_command() {
 	clear_screen();
-}
-
-static int checkDate(int hour, int minute, int second, int day, int month, int year) {
-	if (hour > 23 || hour < 0)
-		return FALSE;
-	if (minute > 59 || minute < 0)
-		return FALSE;
-	if (second > 59 || second < 0)
-		return FALSE;
-	if (day > 31 || day <= 0)
-		return FALSE;
-	if (month > 12 || month <= 0)
-		return FALSE;
-	if (year < 0 || year > 99)
-		return FALSE;
-	if (month == 2 && day > 28)
-		return FALSE;
-
-	return TRUE;
 }
