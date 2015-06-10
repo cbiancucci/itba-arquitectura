@@ -12,6 +12,7 @@ static void video_reset_color();
 static void video_clear_line(int row);
 static void video_reset_current_row();
 static void video_reset_current_column();
+static void video_print_screensaver();
 
 void video_init(){
 	video_reset_color();
@@ -216,13 +217,28 @@ void video_trigger_restore() {
 void video_trigger_screensaver() {
 
 	video_trigger_backup();
-
 	video_clear_screen();
-
-	video_set_font_background_color(COLOR_BROWN, COLOR_WHITE);
-
-	video_print_string("\t\t\tSARASA - TPE ARQUI 1C 2015\n\n\n\t\t\t\t CHRISTIAN BIANCUCCI LEG: 53344 \n\n\t\t\t\t MATIAS GUALINO - LEG. 53344 \n\n\t\t\t\t DAMIAN RIZZOTTO - LEG. 53344");
-                                                        
+	video_print_screensaver();
 	video_update_screen_color();
+}
 
+static void video_print_screensaver(){
+	video_set_font_background_color(COLOR_GREEN, COLOR_BLACK);
+	video_print_string("añgfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lño30\n");
+	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwñlorem\t  mdqd+'3059\t\n");
+	video_print_string("1 furt- \tnñn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
+	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
+	
+	video_print_string("\t\t\t\t\t\t ======================================\n");
+	video_print_string("\n");
+	video_print_string("k.pf \t soidw oadsm \t 53372 - Biancucci, Christian.\t\tmlpotra s nnd k\n");
+	video_print_string("peto'57 \t 76'7o5\t\t53344 - Gualino, Matias.\t\t\t  orem\t  mdqd\n");
+	video_print_string("\t\tofwnwew0dfwe + \t52477 - Rizzotto, Damian.\t\t\tod k.pf  wq\n");
+	video_print_string("\n");
+	video_print_string("\t\t\t\t\t\t ======================================\n");
+	
+	video_print_string("añgfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lño30\n");
+	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwñlorem\t  mdqd+'3059\t\n");
+	video_print_string("1 furt- \tnñn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
+	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
 }
