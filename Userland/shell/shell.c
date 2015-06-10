@@ -187,7 +187,25 @@ void help_command(int argc, char** argv) {
 }
 
 void time_command(int argc, char** argv) {
+	time_t* t;
+	t = time();
 	
+	if (argc == 1) {
+		char* saludo;
+		saludo = "Buenos dias.";
+		if ((t->hour > 12) && (t->hour < 20)) {
+			saludo = "Buenas tardes.";
+		} else if ((t->hour >= 20) && (t->hour <= 23)) {
+			saludo = "Buenas noches.";
+		} else if ((t->hour >= 0) && (t->hour <= 8)) {
+			saludo = "Madrugador!";
+		}
+		printf("%s Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", saludo, t->day, t->month, t->year, t->hour, t->minute, t->second);
+	} else if (argc == 8) {
+		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+	} else {
+		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+	}
 }
 
 void screensaver_command(int argc, char** argv) {
