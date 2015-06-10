@@ -19,11 +19,6 @@ static bool EOF_READ = FALSE;
 
 static specialKeysStatus specialStatus = { FALSE, FALSE, FALSE }; // CAPS, CTRL, ALT
 
-static int oldCommandsCount = 0;
-static char* oldCommands[10] = {"","","","","","","","","",""};
-static char* temporaryCommand;
-static int currentCommandSelected = -1;
-
 #define NOTHING (char)0
 
 static bool screensaverWillActive = FALSE;
@@ -189,92 +184,9 @@ void keyboardHandler(uint64_t string) {
         switch (string) {
             case 0x1c: // ENTER
 
-				oldCommandsCount++;
-
-				//muevo todos los comandos 1+ para atras
-				for(int i = 8; i >= 0; i--){
-					oldCommands[i+1] = oldCommands[i];
-                }
-
-		        char aux[KEYBOARD_BUFFER_SIZE] = {0};
-				for(int i = 0; i < KEYBOARD_BUFFER_SIZE; i++){
-					aux[i] = buffer[i];
-                }
-				// Pongo el nuevo comando primero
-				oldCommands[0] = aux;
-				
-				currentCommandSelected = -1;
-				temporaryCommand = "";
-
 	            EOF_READ = TRUE;
 	            screensaverWillActive = TRUE;
 	            break;
-
-			case 0xC8: // UP ARROW
-
-	        	if(currentCommandSelected < oldCommandsCount){
-	        		
-		    		//delete all
-		    		while(enqueuePos != 0){
-		    			deleteBuffer();
-                    }
-
-	        		if(currentCommandSelected == -1){
-	        			char aux[KEYBOARD_BUFFER_SIZE] = {0};
-	        			
-	        			for(int i = 0; i < KEYBOARD_BUFFER_SIZE; i++){
-	        				aux[i] = buffer[i];
-                        }
-	        			temporaryCommand = aux;
-					}
-					
-					currentCommandSelected++;
-		    		char* thisCommand = oldCommands[currentCommandSelected];
-		    		
-		    		int i = 0;
-		    		while(*thisCommand){
-		    			buffer[i] = *thisCommand;
-		    			i++;
-		    			thisCommand++;
-		    		}
-		    		
-		    		for(int j = 0; j < i; j++){
-		    			writeChar(buffer[j]);
-					}
-					video_update_cursor();
-			
-	        	}
-	        	break;
-        	case 0xD0: // DOWN ARROW
-	        	if(currentCommandSelected > -1){
-
-	   	    		//delete all
-		    		while(enqueuePos != 0)
-		    			deleteBuffer();
-
-	        		currentCommandSelected--;
-	        		char* thisCommand;
-	        		if(currentCommandSelected == -1){
-	        			thisCommand = temporaryCommand;
-	        		}else{
-		    			thisCommand = oldCommands[currentCommandSelected];
-	        		}
-
-
-		    		int i = 0;
-		    		while(*thisCommand){
-		    			buffer[i] = *thisCommand;
-		    			i++;
-		    			thisCommand++;
-		    		}
-		    		int j;
-		    		for(j=0; j < i; j++){
-		    			writeChar(buffer[j]);
-					}
-					video_update_cursor();
-
-	        	}
-	        	break;
             case 0x0E: // BACKSPACE
                 deleteBuffer();
                 break;
