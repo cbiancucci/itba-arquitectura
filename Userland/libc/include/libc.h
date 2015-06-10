@@ -20,6 +20,11 @@ int scanf(char* c, int length);
 char* itoc(int number);
 void clear_screen();
 void exit();
+bool string_numeric(char* str);
+bool is_numeric(char c);
+time_t* time();
+void set_time(time_t * t);
+int ctoi(char* c);
 /*
 
 
@@ -27,18 +32,16 @@ void free(void* m);
 int strpos(char* s, char n);
 
 char* itoc(int number) ;
-int ctoi(char* c);
+
 color_t get_color();
 void set_color(vga_color fg, vga_color bg);
-time_t* time();
+
 
 char* strcpy(char* dest, char* src);
 void * memset(void * destiny, int32_t c, uint64_t length);
-bool string_numeric(char* str);
-bool is_numeric(char c);
 char* strcat(char* str1, char* str2);
 void clear_screen();
-void set_time(time_t * t);
+
 void exit();
 
 */

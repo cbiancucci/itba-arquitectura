@@ -236,10 +236,50 @@ char* itoc(int number) {
 
 }
 
+bool string_numeric(char* str) {
+	int len;
+	len = strlen(str);
+	for (int i = 0; i < len; i++)
+	{
+		if (!is_numeric(str[i])) {
+			return FALSE;
+		}
+	}
+	return TRUE;
+}
+
+bool is_numeric(char c) {
+	return (c >= '0' && c <= '9');
+}
+
+time_t* time() {
+	time_t* t = (time_t*)calloc(sizeof(time_t));
+	sys_rtc_get(t);
+	return t;
+}
+
+void set_time(time_t * t) {
+	sys_rtc_set(t);
+}
+
 void clear_screen() {
 	sys_clear_screen();
 }
 
 void exit() {
 	sys_exit();
+}
+
+int ctoi(char* c) {
+	int ans;
+	ans = 0;
+	int len;
+	len = strlen(c);
+	int i;
+	i = 0;
+	while  (i < len) {
+		ans = ans * 10 + c[i] - '0';
+		i++;
+	}
+	return ans;
 }

@@ -20,9 +20,11 @@ void help_command(int argc, char** argv);
 void time_command(int argc, char** argv);
 void screensaver_command(int argc, char** argv);
 void exit_command();
-void clear_command(int argc);
+void clear_command();
 
 void parseCommand(char* commandBuffer);
+
+static int checkDate(int hour, int minute, int second, int day, int month, int year);
 
 int main() {
 
@@ -96,7 +98,7 @@ void parseCommand(char* commandBuffer) {
 		break;
 
 	case 4: // CLEAR
-		clear_command(argc);
+		clear_command();
 		break;
 
 	case 5: //screensaver
@@ -185,11 +187,59 @@ void help_command(int argc, char** argv) {
 }
 
 void time_command(int argc, char** argv) {
-
+	time_t* t;
+	t = time();
+	
+	if (argc == 1) {
+		char* saludo;
+		saludo = "Buenos dias.";
+		if ((t->hour > 12) && (t->hour < 20)) {
+			saludo = "Buenas tardes.";
+		} else if ((t->hour >= 20) && (t->hour <= 23)) {
+			saludo = "Buenas noches.";
+		} else if ((t->hour >= 0) && (t->hour <= 8)) {
+			saludo = "Madrugador!";
+		}
+		printf("%s Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", saludo, t->day, t->month, t->year, t->hour, t->minute, t->second);
+	} else if (argc == 8) {
+		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+	} else {
+		printf("Comando invalido. Comandos disponibles [time] [time set]\n");
+	}
 }
 
 void screensaver_command(int argc, char** argv) {
-
+	if (argc == 1) {
+		sys_show_screensaver();
+	} else if (argc == 3) {
+		if (strcmp(argv[1], "set") == 0) {
+			if (!string_numeric(argv[2])) {
+				printf("El formato del comando es 'screensaver set CANTIDAD_SEGUNDOS', donde los segundos son un numero.\n");
+				return;
+			} else {
+				int sec;
+				int len;
+				len = strlen(argv[2]);
+				int i;
+				i = 0;
+				while (i < len) {
+					if(!is_numeric(argv[2][i])){
+		    			return;
+					}
+	    			sec = sec*10 + argv[2][i] - '0';
+	    			i++;
+				}
+				if(sec==0){
+					printf("Salva pantallas desactivado.\n");
+				}
+				sys_set_delay_screensaver(sec);
+			}
+		} else {
+			printf("Comando invalido. Para indicar el tiempo del salva pantallas ejecuta el comando 'screensaver set CANTIDAD_SEGUNDOS'\n");
+		}
+	} else {
+		printf("Comando invalido. Para indicar el tiempo del salva pantallas ejecuta el comando 'screensaver set CANTIDAD_SEGUNDOS'\n");
+	}
 }
 
 void exit_command() {
@@ -197,6 +247,25 @@ void exit_command() {
 	exit();
 }
 
-void clear_command(int argc) {
+void clear_command() {
 	clear_screen();
+}
+
+static int checkDate(int hour, int minute, int second, int day, int month, int year) {
+	if (hour > 23 || hour < 0)
+		return FALSE;
+	if (minute > 59 || minute < 0)
+		return FALSE;
+	if (second > 59 || second < 0)
+		return FALSE;
+	if (day > 31 || day <= 0)
+		return FALSE;
+	if (month > 12 || month <= 0)
+		return FALSE;
+	if (year < 0 || year > 99)
+		return FALSE;
+	if (month == 2 && day > 28)
+		return FALSE;
+
+	return TRUE;
 }

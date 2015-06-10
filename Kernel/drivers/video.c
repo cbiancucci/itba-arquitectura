@@ -4,6 +4,8 @@ int video_current_row = 0;
 int video_current_column = 0;
 static color_t video_current_color = 0;
 
+static screen_t screensaverBackup;
+
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
 static void video_reset_color();
@@ -180,4 +182,47 @@ void video_update_cursor() {
 	// cursor HIGH port to vga INDEX register
 	outb(0x3D4, 0x0E);
 	outb(0x3D5, (unsigned char )((position >> 8) & 0xFF));
+}
+
+void video_trigger_backup() {
+
+	screensaverBackup.row = video_current_row;
+	screensaverBackup.column = video_current_column;
+	screensaverBackup.color = video_current_color;
+
+	for (int i = 0; i < (SCREEN_HEIGHT * SCREEN_WIDTH); i++) {
+		screensaverBackup.screen[i] = SCREEN_START[i];
+	}
+
+	video_current_row = 0;
+	video_current_column = 0;
+	video_reset_color();
+
+}
+
+void video_trigger_restore() {
+
+	video_current_row = screensaverBackup.row;
+	video_current_column = screensaverBackup.column;
+	video_current_color = screensaverBackup.color;
+
+	for (int i = 0; i < (SCREEN_HEIGHT * SCREEN_WIDTH); i++) {
+		SCREEN_START[i] = screensaverBackup.screen[i];
+	}
+
+	video_update_cursor();
+}
+
+void video_trigger_screensaver() {
+
+	video_trigger_backup();
+
+	video_clear_screen();
+
+	video_set_font_background_color(COLOR_BROWN, COLOR_WHITE);
+
+	video_print_string("\t\t\tSARASA - TPE ARQUI 1C 2015\n\n\n\t\t\t\t CHRISTIAN BIANCUCCI LEG: 53344 \n\n\t\t\t\t MATIAS GUALINO - LEG. 53344 \n\n\t\t\t\t DAMIAN RIZZOTTO - LEG. 53344");
+                                                        
+	video_update_screen_color();
+
 }
