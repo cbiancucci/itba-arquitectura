@@ -190,17 +190,18 @@ void time_command(int argc, char** argv) {
 	
 	if (argc == 1) {
 		char* saludo;
-		saludo = "Buenos dias.";
+		saludo = "Buenos dias.\n";
 		if ((t->hour > 12) && (t->hour < 20)) {
-			saludo = " Buenas tardes.\n";
+			saludo = "Buenas tardes.\n";
 		} else if ((t->hour >= 20) && (t->hour <= 23)) {
-			saludo = " Buenas noches.\n";
+			saludo = "Buenas noches.\n";
 		} else if ((t->hour >= 0) && (t->hour <= 8)) {
-			saludo = " Madrugador!\n";
+			saludo = "Madrugador!\n";
 		}
-		printf("%s Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", saludo, t->day, t->month, t->year, t->hour, t->minute, t->second);
+		printf(saludo);
+		printf("Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", t->day, t->month, t->year, t->hour, t->minute, t->second);
 	} else if (argc == 8) {
-		/*if (strcmp(argv[1], "set") == 0) {
+		if (strcmp(argv[1], "set") == 0) {
 
 			int hour;
 			int minute;
@@ -255,7 +256,7 @@ void time_command(int argc, char** argv) {
 			}
 		} else {
 			printf("Comando invalido.\n");
-		}*/
+		}
 	} else {
 		printf("Comando invalido.\n");
 	}
