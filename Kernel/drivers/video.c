@@ -224,9 +224,9 @@ void video_trigger_screensaver() {
 
 static void video_print_screensaver(){
 	video_set_font_background_color(COLOR_GREEN, COLOR_BLACK);
-	video_print_string("añgfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lño30\n");
-	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwñlorem\t  mdqd+'3059\t\n");
-	video_print_string("1 furt- \tnñn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
+	video_print_string("agfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lo30\n");
+	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwlorem\t  mdqd+'3059\t\n");
+	video_print_string("1 furt- \tnn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
 	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
 	
 	video_print_string("\t\t\t\t\t\t ======================================\n");
@@ -237,8 +237,8 @@ static void video_print_screensaver(){
 	video_print_string("\n");
 	video_print_string("\t\t\t\t\t\t ======================================\n");
 	
-	video_print_string("añgfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lño30\n");
-	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwñlorem\t  mdqd+'3059\t\n");
-	video_print_string("1 furt- \tnñn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
+	video_print_string("agfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lo30\n");
+	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwlorem\t  mdqd+'3059\t\n");
+	video_print_string("1 furt- \tnn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
 	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
 }
