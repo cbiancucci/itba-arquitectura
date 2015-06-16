@@ -112,7 +112,8 @@ void parseCommand(char* commandBuffer) {
 void print_command(int argc, char** argv) {
 	if (argc != 1) {
 		for (int i = 1; i < argc; i++) {
-			printf("%s ", argv[i]);
+			printf(argv[i]);
+			printf(" ");
 		}
 	} else {
 		printf("\n");
@@ -158,9 +159,8 @@ void help_command(int argc, char** argv) {
 
 		case 2: // TIME
 			printf("\n TIME Permite consultar o indicar la hora del sistema.\n");
-			printf(" Uso: time set [HORAS] [MINUTOS] [SEGUNDOS] [DIA] [MES] [ANO]\n");
-			printf(" Ejemplo: time set 18 30 32 10 6 15\n Configura la hora a las 18:30:32 del 10/06/2015.\n");
-			printf(" * [ANO] soporta 2 digitos. Se suma 2000 de forma autmatica.\n");
+			printf(" Uso: time set [HORAS] [MINUTOS] [SEGUNDOS]\n");
+			printf(" Ejemplo: time set 18 30 32\n Configura la hora a las 18:30:32.\n");
 			break;
 
 		case 3: // EXIT
@@ -172,7 +172,7 @@ void help_command(int argc, char** argv) {
 			printf(" Cuando ya probaste mucho sarasa este comando te ayuda a limpiar la pantalla\n para que puedas trabajar mas comodo.\n");
 			break;
 
-		case 5: //screensaver
+		case 5: // SCREENSAVER
 			printf("\n SCREENSAVER Activa el salvapantallas.\n");
 			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
 			break;
@@ -189,71 +189,33 @@ void time_command(int argc, char** argv) {
 	t = time();
 	
 	if (argc == 1) {
-		char* saludo;
-		saludo = "Buenos dias.\n";
-		if ((t->hour > 12) && (t->hour < 20)) {
-			saludo = "Buenas tardes.\n";
-		} else if ((t->hour >= 20) && (t->hour <= 23)) {
-			saludo = "Buenas noches.\n";
-		} else if ((t->hour >= 0) && (t->hour <= 8)) {
-			saludo = "Madrugador!\n";
-		}
-		printf(saludo);
-		printf("Hoy es %02i/%02i/%02i. Son las %02i horas y %02i minutos con %02i segundos ", t->day, t->month, t->year, t->hour, t->minute, t->second);
-	} else if (argc == 8) {
+		printf("Son las ");
+		printf(itoc(t->hour));
+		printf(" horas y ");
+		printf(itoc(t->minute));
+		printf(" minutos con ");
+		printf(itoc(t->second));
+		printf(" segundos.");
+	} else if (argc == 5) {
 		if (strcmp(argv[1], "set") == 0) {
 
-			int hour;
-			int minute;
-			int second;
-			int day;
-			int month;
-			int year;
-
-			bool error;
-			error = FALSE;
-
-			hour = ctoi(argv[2]);
-			minute = ctoi(argv[3]);
-			second = ctoi(argv[4]);
-			day = ctoi(argv[5]);
-			month = ctoi(argv[6]);
-			year = ctoi(argv[7]);
-
+			int hour = ctoi(argv[2]);
+			int minute = ctoi(argv[3]);
+			int second = ctoi(argv[4]);
+			
 			if (hour > 23 || hour < 0) {
 				printf("La hora no es valida.\n");
-				error = TRUE;
-			}
-			if (minute > 59 || minute < 0) {
+			} else if (minute > 59 || minute < 0) {
 				printf("El mes no es valido.\n");
-				error = TRUE;
-			}
-			if (second > 59 || second < 0) {
+			} else if (second > 59 || second < 0) {
 				printf("Los segundos no son validos.\n");
-				error = TRUE;
-			}
-			if (day > 31 || day <= 0) {
-				printf("El dia no es valido.\n");
-				error = TRUE;
-			}
-			if (month > 12 || month <= 0) {
-				printf("El mes no es valido.\n");
-				error = TRUE;
-			}
-			if (year < 0 || year > 99) {
-				printf("El ano no es valido.\n");
-				error = TRUE;
-			} 
-
-			if (error == FALSE) {
+			} else {
 				t->hour = hour;
 				t->minute = minute;
 				t->second = second;
-				t->day = day;
-				t->month = month;
-				t->year = year;
 				set_time(t);
 			}
+			
 		} else {
 			printf("Comando invalido.\n");
 		}
@@ -271,7 +233,8 @@ void screensaver_command(int argc, char** argv) {
 				printf("El formato del comando es 'screensaver set CANTIDAD_SEGUNDOS', donde los segundos son un numero.\n");
 				return;
 			} else {
-				int sec;
+				int sec = ctoi(argv[3]);
+				sec = 0;
 				int len;
 				len = strlen(argv[2]);
 				int i;

@@ -9,11 +9,11 @@
 extern uint64_t screensaverWaitTime;
 extern bool screensaverActive;
 
-void sys_rtc_get(time_t* t) {
+void sys_get_time(time_t* t) {
 	getTime(t);
 }
 
-void sys_rtc_set(time_t* t) {
+void sys_set_time(time_t* t) {
 	setTime(t);
 }
 

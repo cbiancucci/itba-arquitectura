@@ -12,9 +12,6 @@
 #define SECOND		0x0
 #define MINUTE 		0x2
 #define HOUR 		0x4
-#define DAY			0x7
-#define MONTH 		0x8
-#define YEAR 		0x9
 
 void getTime(time_t* t);
 void setTime(time_t* t);

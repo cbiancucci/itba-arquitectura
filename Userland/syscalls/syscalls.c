@@ -8,12 +8,12 @@ void sys_exit() {
 	syscall((uint64_t)SYSCALL_EXIT);
 }
 
-void sys_rtc_get(time_t* t) {
-	syscall((uint64_t)SYSCALL_RTC, (uint64_t)t);
+void sys_get_time(time_t* t) {
+	syscall((uint64_t)SYSCALL_GET_TIME, (uint64_t)t);
 }
 
-void sys_rtc_set(time_t* t) {
-	syscall((uint64_t)SYSCALL_RTC_SET, (uint64_t)t);
+void sys_set_time(time_t* t) {
+	syscall((uint64_t)SYSCALL_SET_TIME, (uint64_t)t);
 }
 
 void sys_write(FILE_DESCRIPTOR fileDescriptor, char * string, int length){

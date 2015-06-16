@@ -11,150 +11,12 @@ void* malloc(int length) {
 	return sys_malloc(length);
 }
 
-static void vfprintf(FILE_DESCRIPTOR fd, char* fmt, va_list ap) {
-
-	char* str = calloc(MAX_PRINTF_LEN);
-	int i = 0;
-	int j = 0;
-
-	while (fmt[i] != 0 && i < MAX_PRINTF_LEN - 1) {
-
-		if (fmt[i] == '%') {
-
-			bool flag_zero = FALSE;
-			uint32_t width = 0;
-
-			i++;
-			if (fmt[i] == 0) {
-				str[j] = fmt[i];
-				break;
-
-			} else if (fmt[i] == '%') {
-
-				str[j] = fmt[i];
-				j++;
-				i++;
-
-			} else {
-				bool flag;
-				do {
-
-					flag = FALSE;
-					switch (fmt[i]) {
-					case 's': {
-						char* arg = va_arg(ap, char*);
-						int k = 0;
-
-						while (arg[k] != 0) {
-							str[j] = arg[k];
-							j++;
-							k++;
-						}
-
-						i++;
-						break;
-					}
-
-					case 'i': {
-
-						int arg = va_arg(ap, int);
-
-						char* number = itoc(arg);
-
-						int k = 0;
-
-						int numlen = strlen(number);
-
-						if (numlen < width) {
-
-							char chartowrite;
-							int numtowrite = width - numlen;
-
-							if (flag_zero) {
-								chartowrite = '0';
-
-							} else {
-								chartowrite = ' ';
-							}
-
-							for (int i = 0; i < numtowrite; i++) {
-								str[j] = chartowrite;
-								j++;
-							}
-
-						}
-
-						while (number[k] != 0) {
-							str[j] = number[k];
-							j++;
-							k++;
-						}
-
-						i++;
-						break;
-
-					}
-
-					case 'c': {
-
-						char arg = (char)va_arg(ap, int);
-
-						str[j] = arg;
-						j++;
-						i++;
-						break;
-
-					}
-					case '0': {
-						if (!flag_zero) {
-							flag_zero = TRUE;
-							i++;
-							flag = TRUE;
-							break;
-						}
-						break;
-					}
-
-					case '1':
-					case '2':
-					case '3':
-					case '4':
-					case '5':
-					case '6':
-					case '7':
-					case '8':
-					case '9': {
-						width = fmt[i] - '0';
-						i++;
-						flag = TRUE;
-						break;
-					}
-
-					}
-
-				} while (flag);
-
-			}
-
-		} else if (fmt[i] != 0) {
-			str[j] = fmt[i];
-			j++;
-			i++;
-		} else {
-			str[j] = fmt[i];
-			break;
-		}
-
-	}
-	sys_write(fd, str, j);
-}
-
 void printf(char* fmt, ...) {
 
 	va_list ap;
 	va_start(ap, fmt);
 
-	vfprintf(STDOUT, fmt, ap);
+	sys_write(STDOUT, fmt, strlen(fmt));
 
 	va_end(ap);
 
@@ -165,13 +27,30 @@ void putchar(char c) {
 	sys_write(STDOUT, &c, 1);
 }
 
-int strlen(char* str) {
-	int size;
-	for (size = 0; *str != '\0' ; str++) {
-		size++;
+int strcmp(char * str1, char * str2){
+	int i;
+	int length1 = strlen(str1);
+	int lenght2 = strlen(str2);
+
+	if(length1 != lenght2){
+		return length1 - lenght2;
 	}
 
-	return size;
+	for(i = 0; i < length1; i++){
+		if(str1[i] != str2[i]){
+			return str1[i] > str2[i] ? 1 : -1;
+		}
+	}
+	return 0;
+}
+
+int strlen(char * str){
+	int i = 0;
+	
+	while (str[i]){
+		i++;
+	}
+	return i;
 }
 
 int getchar() {
@@ -192,16 +71,6 @@ int scanf(char* c, int length) {
 	char read = sys_read(STDOUT, c, length);
 
 	return read;
-}
-
-int strcmp(const char* s1, const char* s2) {
-
-	while (*s1 && *s1 == *s2) {
-		s1++;
-		s2++;
-	}
-
-	return *s1 - *s2;
 }
 
 char* itoc(int number) {
@@ -254,12 +123,12 @@ bool is_numeric(char c) {
 
 time_t* time() {
 	time_t* t = (time_t*)calloc(sizeof(time_t));
-	sys_rtc_get(t);
+	sys_get_time(t);
 	return t;
 }
 
 void set_time(time_t * t) {
-	sys_rtc_set(t);
+	sys_set_time(t);
 }
 
 void clear_screen() {

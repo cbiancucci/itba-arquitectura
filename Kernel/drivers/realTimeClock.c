@@ -21,23 +21,15 @@ void getTime(time_t* t) {
 
 	while (RTCUpdate());
 
-	t->year = RTCRead(YEAR);
-	t->month = RTCRead(MONTH);
-	t->day = RTCRead(DAY);
 	t->hour = RTCRead(HOUR);
 	t->minute = RTCRead(MINUTE);
 	t->second = RTCRead(SECOND);
 
 	if (isBcd(regb)) {
-		t->year = bcdToInt(t->year);
-		t->month = bcdToInt(t->month);
-		t->day = bcdToInt(t->day);
 		t->hour = bcdToInt(t->hour);
 		t->minute = bcdToInt(t->minute);
 		t->second = bcdToInt(t->second);
 	}
-
-	t->year = 2000 + t->year;
 
 	if (twelveFormatClock(regb) && isPM(t->hour)) {
 		// turn off pm. Add 12 hours. % 24 for midnight
@@ -52,16 +44,11 @@ void setTime(time_t* t) {
 
 	while (RTCUpdate());
 
-	t->year = t->year % 100;
-
 	if (!twelveFormatClock(regb) && t->hour > 12) {
 		t->hour = toPM(t->hour - 12);
 	}
 
 	if (isBcd(regb)) {
-		t->year = intToBcd(t->year);
-		t->month = intToBcd(t->month);
-		t->day = intToBcd(t->day);
 		t->hour = intToBcd(t->hour);
 		t->minute = intToBcd(t->minute);
 		t->second = intToBcd(t->second);
@@ -70,9 +57,6 @@ void setTime(time_t* t) {
 	RTCWrite(SECOND, t->second);
 	RTCWrite(MINUTE, t->minute);
 	RTCWrite(HOUR, t->hour);
-	RTCWrite(DAY, t->day);
-	RTCWrite(MONTH, t->month);
-	RTCWrite(YEAR, t->year);
 
 }
 

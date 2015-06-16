@@ -9,7 +9,6 @@ static screen_t screensaverBackup;
 static void video_scroll();
 static uint16_t video_get_full_char_from(int row, int col);
 static void video_reset_color();
-static void video_clear_line(int row);
 static void video_reset_current_row();
 static void video_reset_current_column();
 static void video_print_screensaver();
@@ -46,14 +45,6 @@ void video_clear_screen(){
 	}
 	video_reset_cursor();
 	video_update_screen_color();
-}
-
-static void video_clear_line(int row) {
-
-	for (int i = 0; i < SCREEN_WIDTH; i++) {
-		video_print_char_at(' ', row, i);
-	}
-	video_reset_current_column();
 }
 
 color_t video_get_color(){
