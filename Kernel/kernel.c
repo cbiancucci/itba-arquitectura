@@ -67,8 +67,6 @@ int main()
 	video_print_string("\t\t\t\t\t/____/_/  |_/_/ |_/_/  |_/____/_/  |_|\n");
 	
 	video_set_font_background_color(15, 0);
-	video_println(" ");
-	video_print_string("\t\tMarcelo uso la primera computadora (y tambien nuestro Kernel)\n");
 
 	((EntryPoint)sampleCodeModuleAddress)();
 	return 0;
