@@ -70,4 +70,6 @@ void video_trigger_restore();
 void video_trigger_screensaver();
 void activeScreensaver();
 
+void play_sound(uint32_t nFrequence);
+
 #endif
