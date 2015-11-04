@@ -14,6 +14,7 @@ static void video_reset_current_column();
 static void video_print_screensaver();
 
 void video_init(){
+	play_sound(1000);
 	video_reset_color();
 	video_clear_screen();
 }
@@ -38,7 +39,6 @@ void video_set_font_background_color(video_color font, video_color background){
 }
 
 void video_clear_screen(){
-	playsound();
 	for(int j = 0; j < SCREEN_WIDTH; j++){
 		for(int i = 0; i < SCREEN_HEIGHT; i++){
 			video_printc(' ');
@@ -246,3 +246,22 @@ static void video_print_screensaver(){
 	video_print_string("\n");
 	video_print_string("\n");
 }
+
+
+//Play sound using built in speaker
+void play_sound(uint32_t nFrequence) {
+ 	uint32_t Div;
+ 	uint8_t tmp;
+ 
+    //Set the PIT to the desired frequency
+ 	Div = 1193180 / nFrequence;
+ 	outb(0x43, 0xb6);
+ 	outb(0x42, (uint8_t) (Div) );
+ 	outb(0x42, (uint8_t) (Div >> 8));
+ 
+    //And play the sound using the PC speaker
+ 	tmp = inb(0x61);
+  	if (tmp != (tmp | 3)) {
+ 		outb(0x61, tmp | 3);
+ 	}
+ }
