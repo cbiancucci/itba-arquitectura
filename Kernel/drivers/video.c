@@ -265,3 +265,9 @@ void play_sound(uint32_t nFrequence) {
  		outb(0x61, tmp | 3);
  	}
  }
+
+void mute_sound(){
+	uint8_t tmp = inb(0x61) & 0xFC;
+ 
+ 	outb(0x61, tmp);
+}
