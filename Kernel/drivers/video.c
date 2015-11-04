@@ -38,6 +38,7 @@ void video_set_font_background_color(video_color font, video_color background){
 }
 
 void video_clear_screen(){
+	playsound();
 	for(int j = 0; j < SCREEN_WIDTH; j++){
 		for(int i = 0; i < SCREEN_HEIGHT; i++){
 			video_printc(' ');
@@ -214,22 +215,34 @@ void video_trigger_screensaver() {
 }
 
 static void video_print_screensaver(){
-	video_set_font_background_color(COLOR_GREEN, COLOR_BLACK);
-	video_print_string("agfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lo30\n");
-	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwlorem\t  mdqd+'3059\t\n");
-	video_print_string("1 furt- \tnn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
-	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
+	video_set_font_background_color(COLOR_BLUE, COLOR_WHITE);
 	
-	video_print_string("\t\t\t\t\t\t ======================================\n");
 	video_print_string("\n");
-	video_print_string("k.pf \t soidw oadsm \t 53372 - Biancucci, Christian.\t\tmlpotra s nnd k\n");
-	video_print_string("peto'57 \t 76'7o5\t\t53344 - Gualino, Matias.\t\t\t  orem\t  mdqd\n");
-	video_print_string("\t\tofwnwew0dfwe + \t52477 - Rizzotto, Damian.\t\t\tod k.pf  wq\n");
 	video_print_string("\n");
-	video_print_string("\t\t\t\t\t\t ======================================\n");
-	
-	video_print_string("agfurt- \t\t sa d k\t mdsa s vod k.pf \t\to  \tsd- \t\t sa d k\t a s vod k.pf \t\t ,lo30\n");
-	video_print_string("- \t\t sa d k\t mdsa s vod k.pf  wqe.-,fhpr,w\t\t qwlorem\t  mdqd+'3059\t\n");
-	video_print_string("1 furt- \tnn sa d k\t mlpotra s vod k.pf \t\t\t,ofwnwew0dfwe + .wefw0'r2 \t\n");
-	video_print_string("o  \tsd- \t\t sa d k\t a s vod k.pf \t soidw oadsm `peto'57 \t 76'7o5`.`q+\t ksdas\t\n");
+	video_print_string("\n");
+	video_print_string("\n");
+
+	video_print_string("\t\t\t\t\t\t\t _____  _____ ______   ___    \n");
+	video_print_string("\t\t\t\t\t\t\t|_   _||_   _|| ___ \\ / _ \\   \n");
+	video_print_string("\t\t\t\t\t\t\t  | |    | |  | |_/ // /_\\ \\  \n");
+	video_print_string("\t\t\t\t\t\t\t  | |    | |  | ___ \\|  _  |  \n");
+	video_print_string("\t\t\t\t\t\t\t _| |_   | |  | |_/ /| | | |  \n");
+	video_print_string("\t\t\t\t\t\t\t \\___/   \\_/  \\____/ \\_| |_/  \n");
+
+	video_print_string("\n");
+
+	video_print_string("\t\t\t\t\t\t Arquitectura de las Computadoras\n");
+
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
+	video_print_string("\n");
 }
