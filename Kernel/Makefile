@@ -2,7 +2,7 @@ include ../Makefile.variables
 include Makefile.inc
 
 KERNEL=kernel.bin
-SOURCES=drivers/keyboard.c $(wildcard *.c) drivers/video.c drivers/realTimeClock.c
+SOURCES=drivers/keyboard.c $(wildcard *.c) drivers/video.c drivers/realTimeClock.c drivers/audio.c
 OBJECTS=$(SOURCES:.c=.o)
 
 LOADERSRC=loader.asm

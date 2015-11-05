@@ -5,6 +5,7 @@
 #include <naiveConsole.h>
 #include <syscalls.h>
 #include <video.h>
+#include <audio.h>
 
 extern uint8_t text;
 extern uint8_t rodata;
@@ -17,7 +18,7 @@ static const uint64_t PageSize = 0x1000;
 static uint64_t pitTimer = 0;
 uint64_t screensaverWaitTime = 10;
 uint64_t screensaverTimer = 0;
-uint64_t soundTimer = 10;
+uint64_t audioTimer = 10;
 bool screensaverActive = FALSE;
 bool audioActive = FALSE;
 
@@ -59,6 +60,7 @@ int main()
 	video_init();
 
 	screensaverResetTimer();
+	play_sound(100);
 
 	video_set_font_background_color(4, 0);
                                                                                
@@ -78,14 +80,14 @@ void irq0_handler() {
 
 	pitTimer++;
 	screensaverTimer--;
-	soundTimer--;
+	audioTimer--;
 
 	if (screensaverTimer == 0 && !screensaverActive) {
 		activeScreensaver();
 	}
 
-	if(soundTimer == 0 && !audioActive){
-		muteSound();	
+	if(audioTimer == 0 && !audioActive){
+		audio_stop();
 	}
 
 }
@@ -106,7 +108,8 @@ void activeScreensaver() {
 	video_trigger_screensaver();
 }
 
-void muteSound() {
+void audio_stop() {
 	audioActive = FALSE;
 	mute_sound();
+	audioTimer = 10;
 }
