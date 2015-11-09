@@ -22,6 +22,7 @@ extern 		sys_keyboard_replace_buffer
 extern 		sys_set_delay_screensaver
 extern		sys_clear_screen
 extern 		sys_show_screensaver
+extern		sys_audio_beep
 
 loader:
 
@@ -119,7 +120,10 @@ software_interruptions:							; Interrupciones de software, int 80h
 		cmp			rdi, 12
 		jz			hang
 
-		jmp 		soft_interrupt_done 		; La syscall no existe
+		cmp			rdi, 13
+		jz			int_sys_audio_beep
+
+		jmp 		soft_interrupt_done		; La syscall no existe
 
 int_sys_get_time:
 		call 		prepare_params
@@ -169,6 +173,11 @@ int_sys_clear_screen:
 		call 		prepare_params
 		call 		sys_clear_screen
 		jmp			soft_interrupt_done
+
+int_sys_audio_beep:
+		call 		prepare_params
+		call 		sys_audio_beep
+		jmp			soft_interrupt_done		
 
 int_sys_show_screensaver:
 		call 		prepare_params

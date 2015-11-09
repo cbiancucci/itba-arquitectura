@@ -16,6 +16,7 @@
 #define SYSCALL_SHOW_SCREENSAVER			10
 #define SYSCALL_CLEAR_SCREEN				11
 #define SYSCALL_EXIT						12
+#define SYSCALL_BEEP						13
 
 void sys_get_time(time_t* t);
 void sys_set_time(time_t* t);
@@ -29,5 +30,6 @@ void sys_set_delay_screensaver(uint64_t t);
 void sys_show_screensaver();
 void sys_clear_screen();
 void sys_exit();
+void sys_audio_beep();
 
 #endif

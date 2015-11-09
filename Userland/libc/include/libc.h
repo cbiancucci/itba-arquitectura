@@ -25,5 +25,6 @@ bool is_numeric(char c);
 time_t* time();
 void set_time(time_t * t);
 int ctoi(char* c);
+void beep();
 
 #endif

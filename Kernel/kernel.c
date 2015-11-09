@@ -60,7 +60,6 @@ int main()
 	video_init();
 
 	screensaverResetTimer();
-	play_sound(100);
 
 	video_set_font_background_color(4, 0);
                                                                                

@@ -12,7 +12,7 @@ extern char bss;
 extern char endOfBinary;
 
 static int commandCount = 6;
-static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver"};
+static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver", "beep", "play"};
 
 // COMMANDS
 void print_command(int argc, char** argv);
@@ -21,6 +21,7 @@ void time_command(int argc, char** argv);
 void screensaver_command(int argc, char** argv);
 void exit_command();
 void clear_command();
+void beep_command();
 
 void parseCommand(char* commandBuffer);
 
@@ -103,6 +104,10 @@ void parseCommand(char* commandBuffer) {
 		screensaver_command(argc, argv);
 		break;
 
+	case 6: // beep
+		beep_command();
+		break;
+
 	default:
 		printf("El comando no fue encontrado.");
 	}
@@ -123,9 +128,8 @@ void print_command(int argc, char** argv) {
 void help_command(int argc, char** argv) {
 	// Si vino solo help, listo todos los comandos 
 	if (argc == 1) {
-		printf("\nSarasa v1.0.0 (x64). GNU bash, version 0.0.1\n");
-		printf("Desarrollado para ARQUITECTURA DE LAS COMPUTADORAS.\n");
-		printf("@Zeitzen @matiasgualino @cbiancucci\n");
+		printf("\nSarasa v1.0.0 (x64).\n");
+		printf("ARQUITECTURA DE LAS COMPUTADORAS.\n");
 		printf("\nComandos disponibles:\n");
 		printf("\tprint\t\t\tImprime un mensaje en pantalla.\n");
 		printf("\thelp\t\t\t Describe cada uno de los comandos disponibles.\n");
@@ -266,4 +270,8 @@ void exit_command() {
 
 void clear_command() {
 	clear_screen();
+}
+
+void beep_command() {
+	beep();
 }

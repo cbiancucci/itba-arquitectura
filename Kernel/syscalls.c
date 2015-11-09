@@ -5,6 +5,7 @@
 #include <realTimeClock.h>
 #include <keyboard.h>
 #include <lib.h>
+#include <audio.h>
 
 extern uint64_t screensaverWaitTime;
 extern bool screensaverActive;
@@ -80,4 +81,8 @@ void sys_set_delay_screensaver(uint64_t t) {
 void sys_show_screensaver() {
 	activeScreensaver();
 	while(screensaverActive);
+}
+
+void sys_audio_beep() {
+	audio_beep(100);
 }

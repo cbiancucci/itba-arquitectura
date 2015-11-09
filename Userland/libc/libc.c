@@ -152,3 +152,7 @@ int ctoi(char* c) {
 	}
 	return ans;
 }
+
+void beep() {
+	sys_audio_beep();
+}

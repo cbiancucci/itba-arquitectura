@@ -51,3 +51,7 @@ void sys_set_delay_screensaver(uint64_t t) {
 void sys_show_screensaver() {
 	syscall((uint64_t)SYSCALL_SHOW_SCREENSAVER);
 }
+
+void sys_audio_beep() {
+	syscall((uint64_t)SYSCALL_BEEP);
+}
