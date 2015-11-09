@@ -8,6 +8,6 @@
 void play_sound(uint32_t nFrequence);
 void mute_sound();
 void audio_stop();
-void audio_beep();
+void activeAudioBeep();
 
 #endif

@@ -11,7 +11,7 @@
 extern char bss;
 extern char endOfBinary;
 
-static int commandCount = 6;
+static int commandCount = 8;
 static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver", "beep", "play"};
 
 // COMMANDS
@@ -105,7 +105,7 @@ void parseCommand(char* commandBuffer) {
 		break;
 
 	case 6: // beep
-		beep_command();
+		beep_command(100);
 		break;
 
 	default:

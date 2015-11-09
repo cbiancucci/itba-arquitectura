@@ -18,9 +18,10 @@ static const uint64_t PageSize = 0x1000;
 static uint64_t pitTimer = 0;
 uint64_t screensaverWaitTime = 10;
 uint64_t screensaverTimer = 0;
-uint64_t audioTimer = 10;
+uint64_t audioTimer = 5;
 bool screensaverActive = FALSE;
 bool audioActive = FALSE;
+uint32_t beepFrequence = 0;
 
 static void * const sampleCodeModuleAddress = (void*)0x400000;
 static void * const sampleDataModuleAddress = (void*)0x500000;
@@ -85,10 +86,13 @@ void irq0_handler() {
 		activeScreensaver();
 	}
 
-	if(audioTimer == 0 && !audioActive){
-		audio_stop();
+	if(audioActive == TRUE) {
+		if(audioTimer == 0){
+			audio_stop();
+		} else {
+			play_sound(beepFrequence);
+		}
 	}
-
 }
 
 bool screensaverResetTimer() {
@@ -107,8 +111,13 @@ void activeScreensaver() {
 	video_trigger_screensaver();
 }
 
+void activeAudioBeep() {
+	beepFrequence = 100;
+	audioActive = TRUE;
+	audioTimer = 5;
+}
+
 void audio_stop() {
 	audioActive = FALSE;
 	mute_sound();
-	audioTimer = 10;
 }

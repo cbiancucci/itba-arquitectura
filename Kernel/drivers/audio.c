@@ -23,7 +23,3 @@ void mute_sound(){
 
 	outb(0x61, tmp);
 }
-
-void audio_beep(){
-	play_sound(100);
-}

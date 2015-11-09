@@ -84,5 +84,5 @@ void sys_show_screensaver() {
 }
 
 void sys_audio_beep() {
-	audio_beep(100);
+	activeAudioBeep();
 }
