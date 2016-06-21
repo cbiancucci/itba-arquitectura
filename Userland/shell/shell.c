@@ -184,6 +184,7 @@ void help_command(int argc, char** argv) {
 
 		case 6: // BEEP
 			printf("\n BEEP Activa un pitido utilizando el PC-Speaker.\n");
+			printf("\n Su funcionamiento esta condicionado por el hardware.\n");
 			break;
 
 		default:
