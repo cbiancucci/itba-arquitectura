@@ -63,13 +63,13 @@ int main()
 	screensaverResetTimer();
 
 	video_set_font_background_color(4, 0);
-                                                                               
-	video_print_string("\t\t\t\t\t   _____ ___    ____  ___   _____ ___ \n");
-	video_print_string("\t\t\t\t\t  / ___//   |  / __ \\/   | / ___//   |\n");
-	video_print_string("\t\t\t\t\t  \\__ \\/ /| | / /_/ / /| | \\__ \\/ /| |\n");
-	video_print_string("\t\t\t\t\t ___/ / ___ |/ _, _/ ___ |___/ / ___ |\n");
-	video_print_string("\t\t\t\t\t/____/_/  |_/_/ |_/_/  |_/____/_/  |_|\n");
-	
+
+	video_print_string("            ____  _____\n");
+	video_print_string("   _____   / __ \\/ ___/\n");
+	video_print_string("  / ___/  / / / /\\__ \\ \n");
+	video_print_string(" (__  )  / /_/ /___/ / \n");
+	video_print_string("/____/   \\____//____/  \n");
+
 	video_set_font_background_color(15, 0);
 
 	((EntryPoint)sampleCodeModuleAddress)();
