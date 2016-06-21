@@ -11,8 +11,8 @@
 extern char bss;
 extern char endOfBinary;
 
-static int commandCount = 8;
-static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver", "beep", "play"};
+static int commandCount = 7;
+static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver", "beep"};
 
 // COMMANDS
 void print_command(int argc, char** argv);
