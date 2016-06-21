@@ -243,10 +243,4 @@ static void video_print_screensaver(){
 	video_print_string("\n");
 	video_print_string("\n");
 	video_print_string("\n");
-	video_print_string("\n");
-	video_print_string("\n");
-	video_print_string("\n");
-	video_print_string("\n");
-	video_print_string("\n");
-	video_print_string("\n");
 }
