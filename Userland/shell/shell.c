@@ -128,9 +128,9 @@ void print_command(int argc, char** argv) {
 void help_command(int argc, char** argv) {
 	// Si vino solo help, listo todos los comandos 
 	if (argc == 1) {
-		printf("\nSarasa v1.0.0 (x64).\n");
-		printf("ARQUITECTURA DE LAS COMPUTADORAS.\n");
-		printf("\nComandos disponibles:\n");
+		printf("\n sOS v1.0.0 (x64).\n");
+		printf(" ARQUITECTURA DE LAS COMPUTADORAS.\n");
+		printf("\n Comandos disponibles:\n");
 		printf("\tprint\t\t\tImprime un mensaje en pantalla.\n");
 		printf("\thelp\t\t\t Describe cada uno de los comandos disponibles.\n");
 		printf("\ttime\t\t\t Permite consultar o indicar la hora del sistema.\n");
@@ -138,9 +138,9 @@ void help_command(int argc, char** argv) {
 		printf("\tscreensaver\t  Activa o configura el salvapantallas.\n");
 		printf("\texit\t\t\t Finaliza el sistema.\n");
 
-		printf("\nPara mas informacion de cada comando utilizar 'help [COMANDO]'\n");
+		printf("\n Para mas informacion de cada comando utilizar 'help [COMANDO]'\n");
 	} else if (argc == 2) {
-		// Si vino help y algo mas, tengo que ver si ese algo más es un comando de sarasa.
+		// Si vino help y algo mas, tengo que ver si ese algo más es un comando.
 		int cmd = 0;
 		for (; cmd < commandCount; cmd++) {
 			if (strcmp(argv[1], commandList[cmd]) == 0) {
@@ -157,7 +157,7 @@ void help_command(int argc, char** argv) {
 			break;
 
 		case 1: // HELP
-			printf("\n HELP Describe cada uno de los comandos disponibles en Sarasa.\n");
+			printf("\n HELP Describe cada uno de los comandos disponibles en sOS.\n");
 			printf(" Para mas informacion de cada comando utilizar 'help [COMANDO]'\n");
 			break;
 
@@ -173,7 +173,7 @@ void help_command(int argc, char** argv) {
 
 		case 4: // CLEAR
 			printf("\n CLEAR Limpia la pantalla.\n");
-			printf(" Cuando ya probaste mucho sarasa este comando te ayuda a limpiar la pantalla\n para que puedas trabajar mas comodo.\n");
+			printf(" Cuando ya usaste mucho sOS, este comando te limpia la pantalla\n para que puedas trabajar mas comodo.\n");
 			break;
 
 		case 5: // SCREENSAVER
@@ -181,10 +181,10 @@ void help_command(int argc, char** argv) {
 			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
 			break;
 		default:
-			printf("\n El comando no esta disponible en sarasa (proximamente...).\n");
+			printf("\n Comando no esta disponible en sOS.\n");
 		}
 	} else {
-		printf("\n Los comandos en Sarasa constan de una palabra (los desarrolladores son vagos).\n");
+		printf("\n Los comandos en sOS constan de una palabra (desarrolladores vagos).\n");
 	}
 }
 
