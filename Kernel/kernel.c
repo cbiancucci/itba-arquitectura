@@ -69,7 +69,6 @@ int main()
 	video_print_string("\t\t\t\t\t\t\t  / ___/  / / / /\\__ \\ \n");
 	video_print_string("\t\t\t\t\t\t\t (__  )  / /_/ /___/ / \n");
 	video_print_string("\t\t\t\t\t\t\t/____/   \\____//____/  \n\n");
-	video_print_string("\t\t\t\t\t\t\t\t\t\t d[ o_0 ]b\n");
 
 	video_set_font_background_color(15, 0);
 
