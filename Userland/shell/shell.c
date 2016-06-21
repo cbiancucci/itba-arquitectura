@@ -136,6 +136,7 @@ void help_command(int argc, char** argv) {
 		printf("\ttime\t\t\t Permite consultar o indicar la hora del sistema.\n");
 		printf("\tclear\t\t\tLimpia la pantalla.\n");
 		printf("\tscreensaver\t  Activa o configura el salvapantallas.\n");
+		printf("\tbeep\t\t\t Realiza un pitido utilizando el PC-Speaker.\n");
 		printf("\texit\t\t\t Finaliza el sistema.\n");
 
 		printf("\n Para mas informacion de cada comando utilizar 'help [COMANDO]'\n");
