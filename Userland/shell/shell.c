@@ -128,7 +128,7 @@ void print_command(int argc, char** argv) {
 void help_command(int argc, char** argv) {
 	// Si vino solo help, listo todos los comandos 
 	if (argc == 1) {
-		printf("\n sOS v1.0.0 (x64).\n");
+		printf("\n sOS (x64)\n");
 		printf(" ARQUITECTURA DE LAS COMPUTADORAS.\n");
 		printf("\n Comandos disponibles:\n");
 		printf("\tprint\t\t\tImprime un mensaje en pantalla.\n");
@@ -180,6 +180,11 @@ void help_command(int argc, char** argv) {
 			printf("\n SCREENSAVER Activa el salvapantallas.\n");
 			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
 			break;
+
+		case 6: // BEEP
+			printf("\n BEEP Activa un pitido utilizando el PC-Speaker.\n");
+			break;
+
 		default:
 			printf("\n Comando no esta disponible en sOS.\n");
 		}
