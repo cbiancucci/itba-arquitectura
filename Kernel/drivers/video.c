@@ -214,7 +214,7 @@ void video_trigger_screensaver() {
 }
 
 static void video_print_screensaver(){
-	video_set_font_background_color(COLOR_BLUE, COLOR_BLACK);
+	video_set_font_background_color(COLOR_BLACK, COLOR_WHITE);
 	
 	video_print_string("\n");
 	video_print_string("\n");
@@ -222,20 +222,20 @@ static void video_print_screensaver(){
 	video_print_string("\n");
 
 
-	video_print_string("\t\t         _\n");
-	video_print_string("\t\t        / \\      _-'\n");
-	video_print_string("\t\t      _/|  \\-''- _ /\n");
-	video_print_string("\t\t __-' { |          \\n");
-	video_print_string("\t\t     /              \\n");
-	video_print_string("\t\t     /       \"o.  |o }\n");
-	video_print_string("\t\t     |            \\ ;\n");
-	video_print_string("\t\t                   ',\n");
-	video_print_string("\t\t        \\_         __\\n");
-	video_print_string("\t\t          ''-_    \\.//\n");
-	video_print_string("\t\t            / '-____'\n");
-	video_print_string("\t\t           /\n");
-	video_print_string("\t\t         _'\n");
-	video_print_string("\t\t       _-'  Winter is coming\n");
+	video_print_string("\t\t\t\t         _\n");
+	video_print_string("\t\t\t\t        / \\      _-'\n");
+	video_print_string("\t\t\t\t      _/|  \\-''- _ /\n");
+	video_print_string("\t\t\t\t __-' { |          \\\n");
+	video_print_string("\t\t\t\t     /              \\\n");
+	video_print_string("\t\t\t\t     /       \"o.  |o }\n");
+	video_print_string("\t\t\t\t     |            \\ ;\n");
+	video_print_string("\t\t\t\t                   ',\n");
+	video_print_string("\t\t\t\t        \\_         __\\\n");
+	video_print_string("\t\t\t\t          ''-_    \\.//\n");
+	video_print_string("\t\t\t\t            / '-____'\n");
+	video_print_string("\t\t\t\t           /\n");
+	video_print_string("\t\t\t\t         _'\n");
+	video_print_string("\t\t\t\t       _-'  Winter is coming\n");
 
 	video_print_string("\n");
 	video_print_string("\n");
