@@ -64,11 +64,11 @@ int main()
 
 	video_set_font_background_color(4, 0);
 
-	video_print_string("            ____  _____\n");
-	video_print_string("   _____   / __ \\/ ___/\n");
-	video_print_string("  / ___/  / / / /\\__ \\ \n");
-	video_print_string(" (__  )  / /_/ /___/ / \n");
-	video_print_string("/____/   \\____//____/  \n");
+	video_print_string("\t\t\t\t\t\t            ____  _____\n");
+	video_print_string("\t\t\t\t\t\t   _____   / __ \\/ ___/\n");
+	video_print_string("\t\t\t\t\t\t  / ___/  / / / /\\__ \\ \n");
+	video_print_string("\t\t\t\t\t\t (__  )  / /_/ /___/ / \n");
+	video_print_string("\t\t\t\t\t\t/____/   \\____//____/  \n");
 
 	video_set_font_background_color(15, 0);
 
