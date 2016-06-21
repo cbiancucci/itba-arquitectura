@@ -11,8 +11,8 @@
 extern char bss;
 extern char endOfBinary;
 
-static int commandCount = 7;
-static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver", "beep"};
+static int commandCount = 6;
+static char *commandList[]={"print", "help", "time", "exit", "clear", "screensaver"};
 
 // COMMANDS
 void print_command(int argc, char** argv);
@@ -136,7 +136,6 @@ void help_command(int argc, char** argv) {
 		printf("\ttime\t\t\t Permite consultar o indicar la hora del sistema.\n");
 		printf("\tclear\t\t\tLimpia la pantalla.\n");
 		printf("\tscreensaver\t  Activa o configura el salvapantallas.\n");
-		printf("\tbeep\t\t\t Realiza un pitido utilizando el PC-Speaker.\n");
 		printf("\texit\t\t\t Finaliza el sistema.\n");
 
 		printf("\n Para mas informacion de cada comando utilizar 'help [COMANDO]'\n");
@@ -180,11 +179,6 @@ void help_command(int argc, char** argv) {
 		case 5: // SCREENSAVER
 			printf("\n SCREENSAVER Activa el salvapantallas.\n");
 			printf("\n Para configurar el tiempo de espera usar 'screensaver set [TIEMPO_EN_SEGUNDOS]'\n");
-			break;
-
-		case 6: // BEEP
-			printf("\n BEEP Activa un pitido utilizando el PC-Speaker.\n");
-			printf("\n Su funcionamiento esta condicionado por el hardware.\n");
 			break;
 
 		default:
